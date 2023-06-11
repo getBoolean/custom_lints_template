@@ -1,6 +1,7 @@
 import 'package:analyzer/error/error.dart';
 import 'package:analyzer/source/source_range.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:pub_semver/pub_semver.dart';
 import 'package:yaml/yaml.dart';
 
 /// Source: https://github.com/rrousselGit/riverpod/blob/master/packages/riverpod_lint/lib/src/object_utils.dart
@@ -93,5 +94,15 @@ extension CaseChangeExtension on String {
   String get public {
     if (startsWith('_')) return substring(1);
     return this;
+  }
+}
+
+extension CustomLintContextExtension on CustomLintContext {
+  bool get isDart3 {
+    final sdk = pubspec.environment?['sdk'];
+    if (sdk == null || !VersionConstraint.parse('^3.0.0').allowsAll(sdk)) {
+      return false;
+    }
+    return true;
   }
 }
