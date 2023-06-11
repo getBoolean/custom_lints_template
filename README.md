@@ -21,6 +21,7 @@
   - [Disable all lints by default](#disable-all-lints-by-default)
   - [Configuring Lints](#configuring-lints)
   - [Running custom\_lints\_template in the terminal/CI](#running-custom_lints_template-in-the-terminalci)
+- [All Lint Rules](#all-lint-rules)
 - [Contributing Guide](#contributing-guide)
   - [Creating Lints](#creating-lints)
   - [Creating Assists](#creating-assists)
@@ -138,6 +139,11 @@ dart pub global activate custom_lint
 custom_lint
 ```
 
+## All Lint Rules
+
+Most lints have configuration options. These can be specified in the `analysis_options.yaml` or the `pubspec.yaml`.
+See [LINTS.md](docs/LINTS.md) for a list of implemented lint rules and their configuration options.
+
 ## Contributing Guide
 
 ### Creating Lints
@@ -162,6 +168,7 @@ and `OptionsAssist` classes.
     1. Add the new options class to the [lib/src/options/rules.dart](lib/src/options/rules.dart)
     constructor with named parameters.
     1. Run `dart pub run build_runner build` to generate the new [dart_mappable](https://pub.dev/packages/dart_mappable) classes.
+1. Update [LINTS.md](docs/LINTS.md) with the new lint and configuration options.
 
 ### Creating Assists
 
