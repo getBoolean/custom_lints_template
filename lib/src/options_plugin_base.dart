@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:analyzer/error/error.dart';
+import 'package:analyzer/error/listener.dart';
 import 'package:analyzer/source/source_range.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:custom_lints_template/src/options.dart';
@@ -17,6 +19,30 @@ abstract class OptionsFix extends DartFix with _OptionsMixin {
     await _setUp(resolver, context);
     await super.startUp(resolver, context);
   }
+
+  @override
+  Future<void> run(
+    CustomLintResolver resolver,
+    ChangeReporter reporter,
+    CustomLintContext context,
+    AnalysisError analysisError,
+    List<AnalysisError> others,
+  ) async {
+    final options = await this.options;
+    runWithOptions(resolver, reporter, context, analysisError, others, options);
+  }
+
+  /// Emits lints for a given file.
+  ///
+  /// [runWithOptions] will only be invoked with files respecting [filesToAnalyze]
+  void runWithOptions(
+    CustomLintResolver resolver,
+    ChangeReporter reporter,
+    CustomLintContext context,
+    AnalysisError analysisError,
+    List<AnalysisError> others,
+    Options options,
+  );
 }
 
 abstract class OptionsAssist extends DartAssist with _OptionsMixin {
@@ -29,6 +55,28 @@ abstract class OptionsAssist extends DartAssist with _OptionsMixin {
     await _setUp(resolver, context);
     await super.startUp(resolver, context, target);
   }
+
+  @override
+  Future<void> run(
+    CustomLintResolver resolver,
+    ChangeReporter reporter,
+    CustomLintContext context,
+    SourceRange target,
+  ) async {
+    final options = await this.options;
+    runWithOptions(resolver, reporter, context, target, options);
+  }
+
+  /// Emits lints for a given file.
+  ///
+  /// [runWithOptions] will only be invoked with files respecting [filesToAnalyze]
+  void runWithOptions(
+    CustomLintResolver resolver,
+    ChangeReporter reporter,
+    CustomLintContext context,
+    SourceRange target,
+    Options options,
+  );
 }
 
 abstract class OptionsLintRule extends DartLintRule with _OptionsMixin {
@@ -42,6 +90,26 @@ abstract class OptionsLintRule extends DartLintRule with _OptionsMixin {
     await _setUp(resolver, context);
     await super.startUp(resolver, context);
   }
+
+  @override
+  Future<void> run(
+    CustomLintResolver resolver,
+    ErrorReporter reporter,
+    CustomLintContext context,
+  ) async {
+    final options = await this.options;
+    runWithOptions(resolver, reporter, context, options);
+  }
+
+  /// Emits lints for a given file.
+  ///
+  /// [runWithOptions] will only be invoked with files respecting [filesToAnalyze]
+  void runWithOptions(
+    CustomLintResolver resolver,
+    ErrorReporter reporter,
+    CustomLintContext context,
+    Options options,
+  );
 }
 
 // Mixin on DartLintRule

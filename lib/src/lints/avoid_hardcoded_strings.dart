@@ -14,12 +14,12 @@ class AvoidHardcodedStringsRule extends OptionsLintRule {
   );
 
   @override
-  Future<void> run(
+  Future<void> runWithOptions(
     CustomLintResolver resolver,
     ErrorReporter reporter,
     CustomLintContext context,
+    Options options,
   ) async {
-    final options = await this.options;
     if (options.isFileRuleExcluded(resolver.path)) {
       return;
     }
