@@ -115,8 +115,26 @@ custom_lint:
 ### Configuring Lints
 
 Some of the lints have configurations. These can be specified in the `analysis_options.yaml`
-or the `pubspec.yaml` file under the top level key `custom_lints_template:`. These options should be
-covered in detail in the `All Lints` section.
+or the `pubspec.yaml` file under the top level key `custom_lints_template:`.
+
+All lints have the following options:
+
+- `severity`: This can be set to `none`, `info`, `warning` or `error`.
+- `include`: Only lint files matching these regular expressions.
+- `exclude`: Skip linting files matching these regular expressions.
+
+```yaml
+custom_lints_template:
+  rules_exclude:
+    - "test/.*\\.dart"
+  rules:
+    example_lint_code:
+      severity: info
+      include:
+        - "lib/.*\\.dart"
+      exclude:
+        - "lib/.*_temp\\.dart"
+```
 
 ### Running custom_lints_template in the terminal/CI
 
