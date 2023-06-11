@@ -176,3 +176,4 @@ Follow the [custom_lint debugging/testing docs](https://pub.dev/packages/custom_
 ## Resources
 
 - [Example lints](https://github.com/invertase/dart_custom_lint/blob/main/packages/custom_lint/example/example_lint/lib/custom_lint_example_lint.dart)
+- [Riverpod Lint](https://github.com/rrousselGit/riverpod/tree/master/packages/riverpod_lint)
