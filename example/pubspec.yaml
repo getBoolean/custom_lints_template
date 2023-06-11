@@ -17,9 +17,10 @@ dev_dependencies:
   test: ^1.21.0
 
 # custom_lints_template:
-#   avoid_banned_filenames:
-#     entries:
-#      - "bad[^\\.]*.dart"
-#   avoid_hardcoded_strings:
-#     minimum_length: 3
-#     severity: info
+#   rules:
+#     avoid_banned_filenames:
+#       entries:
+#       - "bad[^\\.]*.dart"
+#     avoid_hardcoded_strings:
+#       minimum_length: 4
+#       severity: warning

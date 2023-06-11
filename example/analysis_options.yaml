@@ -5,9 +5,10 @@ analyzer:
     - custom_lint
 
 custom_lints_template:
-  avoid_banned_filenames:
-    entries:
-     - "bad[^\\.]*.dart"
-  avoid_hardcoded_strings:
-    minimum_length: 4
-    severity: warning
+  rules:
+    avoid_banned_filenames:
+      entries:
+      - "bad[^\\.]*.dart"
+    avoid_hardcoded_strings:
+      minimum_length: 3
+      severity: warning
