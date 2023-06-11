@@ -34,7 +34,10 @@ jobs:
         run: dart format --set-exit-if-changed .
 
       - name: Run Dart Analyze
-        run: dart analyze
+        run: dart analyze --fatal-warnings
+      
+      - name: Run Tests
+        run: dart test
 
       - name: Run Custom Lints
         run: cd example && dart run custom_lint
