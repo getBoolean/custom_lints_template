@@ -1,0 +1,97 @@
+import 'package:analyzer/error/error.dart';
+import 'package:analyzer/source/source_range.dart';
+import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:yaml/yaml.dart';
+
+/// Source: https://github.com/rrousselGit/riverpod/blob/master/packages/riverpod_lint/lib/src/object_utils.dart
+extension ObjectUtils<T> on T? {
+  R? safeCast<R>() {
+    final that = this;
+    if (that is R) return that;
+    return null;
+  }
+
+  R? let<R>(R Function(T)? cb) {
+    final that = this;
+    if (that == null) return null;
+    return cb?.call(that);
+  }
+}
+
+extension StringExtension on List<String> {
+  List<RegExp> toRegExpList() => map(RegExp.new).toList();
+}
+
+extension RegexExtension on List<RegExp> {
+  bool has(String filepath) => any((path) => filepath.contains(path));
+}
+
+/// Source: https://github.com/epam-cross-platform-lab/swagger-dart-code-generator/blob/master/lib/src/extensions/yaml_extensions.dart
+extension YamlMapConverter on YamlMap {
+  dynamic _convertNode(dynamic v) {
+    if (v is YamlMap) {
+      return v.toMap();
+    } else if (v is YamlList) {
+      final list = <dynamic>[];
+      for (final e in v) {
+        list.add(_convertNode(e));
+      }
+      return list;
+    } else {
+      return v;
+    }
+  }
+
+  Map<String, dynamic> toMap() {
+    final map = <String, dynamic>{};
+    nodes.forEach((k, v) =>
+        map[(k as YamlScalar).value.toString()] = _convertNode(v.value));
+    return map;
+  }
+}
+
+extension LintCodeCopyWith on LintCode {
+  LintCode copyWith({
+    String? name,
+    String? problemMessage,
+    String? correctionMessage,
+    String? uniqueName,
+    String? url,
+    ErrorSeverity? errorSeverity,
+  }) =>
+      LintCode(
+        name: name ?? this.name,
+        problemMessage: problemMessage ?? this.problemMessage,
+        correctionMessage: correctionMessage ?? this.correctionMessage,
+        uniqueName: uniqueName ?? this.uniqueName,
+        url: url ?? this.url,
+        errorSeverity: errorSeverity ?? this.errorSeverity,
+      );
+}
+
+/// Source: https://github.com/rrousselGit/riverpod/blob/master/packages/riverpod_lint/lib/src/riverpod_custom_lint.dart
+SourceRange sourceRangeFrom({required int start, required int end}) {
+  return SourceRange(start, end - start);
+}
+
+/// Source: https://github.com/rrousselGit/riverpod/blob/master/packages/riverpod_lint/lib/src/riverpod_custom_lint.dart
+extension CaseChangeExtension on String {
+  String get titled {
+    return replaceFirstMapped(
+      RegExp('[a-zA-Z]'),
+      (match) => match.group(0)!.toUpperCase(),
+    );
+  }
+
+  String get lowerFirst {
+    return replaceFirstMapped(
+      RegExp('[a-zA-Z]'),
+      (match) => match.group(0)!.toLowerCase(),
+    );
+  }
+
+  String get public {
+    if (startsWith('_')) return substring(1);
+    return this;
+  }
+}

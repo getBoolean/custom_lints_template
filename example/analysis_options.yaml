@@ -1,0 +1,13 @@
+include: package:lints/recommended.yaml
+
+analyzer:
+  plugins:
+    - custom_lint
+
+boolean_lints:
+  avoid_banned_filenames:
+    entries:
+     - "bad[^\\.]*.dart"
+  avoid_hardcoded_strings:
+    minimum_length: 3
+    severity: info
