@@ -19,7 +19,16 @@ class CustomLintExampleRule extends OptionsLintRule {
     CustomLintContext context,
     Options options,
   ) async {
-    if (options.isFileRuleExcluded(resolver.path)) return;
+    if (options.isFileRuleExcluded(resolver.path)) {
+      return;
+    }
+
+    if (options.rules.customLintExample.shouldSkipFile(resolver.path)) {
+      return;
+    }
+
+    final severity = options.rules.customLintExample.severity;
+    final code = this.code.copyWith(errorSeverity: severity);
     context.registry.addVariableDeclaration((node) {
       // TODO: Check if the error should be reported
       reporter.reportErrorForNode(code, node);

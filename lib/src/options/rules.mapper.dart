@@ -13,6 +13,7 @@ class RulesOptionMapper extends ClassMapperBase<RulesOption> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = RulesOptionMapper._());
       AvoidHardcodedStringsOptionMapper.ensureInitialized();
+      CustomLintExampleOptionMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -33,15 +34,24 @@ class RulesOptionMapper extends ClassMapperBase<RulesOption> {
           key: 'avoid_hardcoded_strings',
           opt: true,
           def: const AvoidHardcodedStringsOption());
+  static CustomLintExampleOption _$customLintExample(RulesOption v) =>
+      v.customLintExample;
+  static const Field<RulesOption, CustomLintExampleOption>
+      _f$customLintExample = Field('customLintExample', _$customLintExample,
+          key: 'custom_lint_example',
+          opt: true,
+          def: const CustomLintExampleOption());
 
   @override
   final Map<Symbol, Field<RulesOption, dynamic>> fields = const {
     #avoidHardcodedStrings: _f$avoidHardcodedStrings,
+    #customLintExample: _f$customLintExample,
   };
 
   static RulesOption _instantiate(DecodingData data) {
     return RulesOption(
-        avoidHardcodedStrings: data.dec(_f$avoidHardcodedStrings));
+        avoidHardcodedStrings: data.dec(_f$avoidHardcodedStrings),
+        customLintExample: data.dec(_f$customLintExample));
   }
 
   @override
@@ -95,7 +105,11 @@ abstract class RulesOptionCopyWith<$R, $In extends RulesOption, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   AvoidHardcodedStringsOptionCopyWith<$R, AvoidHardcodedStringsOption,
       AvoidHardcodedStringsOption> get avoidHardcodedStrings;
-  $R call({AvoidHardcodedStringsOption? avoidHardcodedStrings});
+  CustomLintExampleOptionCopyWith<$R, CustomLintExampleOption,
+      CustomLintExampleOption> get customLintExample;
+  $R call(
+      {AvoidHardcodedStringsOption? avoidHardcodedStrings,
+      CustomLintExampleOption? customLintExample});
   RulesOptionCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -113,15 +127,25 @@ class _RulesOptionCopyWithImpl<$R, $Out>
       get avoidHardcodedStrings => $value.avoidHardcodedStrings.copyWith
           .$chain((v) => call(avoidHardcodedStrings: v));
   @override
-  $R call({AvoidHardcodedStringsOption? avoidHardcodedStrings}) =>
+  CustomLintExampleOptionCopyWith<$R, CustomLintExampleOption,
+          CustomLintExampleOption>
+      get customLintExample => $value.customLintExample.copyWith
+          .$chain((v) => call(customLintExample: v));
+  @override
+  $R call(
+          {AvoidHardcodedStringsOption? avoidHardcodedStrings,
+          CustomLintExampleOption? customLintExample}) =>
       $apply(FieldCopyWithData({
         if (avoidHardcodedStrings != null)
-          #avoidHardcodedStrings: avoidHardcodedStrings
+          #avoidHardcodedStrings: avoidHardcodedStrings,
+        if (customLintExample != null) #customLintExample: customLintExample
       }));
   @override
   RulesOption $make(CopyWithData data) => RulesOption(
       avoidHardcodedStrings:
-          data.get(#avoidHardcodedStrings, or: $value.avoidHardcodedStrings));
+          data.get(#avoidHardcodedStrings, or: $value.avoidHardcodedStrings),
+      customLintExample:
+          data.get(#customLintExample, or: $value.customLintExample));
 
   @override
   RulesOptionCopyWith<$R2, RulesOption, $Out2> $chain<$R2, $Out2>(
