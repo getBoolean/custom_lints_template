@@ -99,4 +99,6 @@ extension CustomLintContextExtension on CustomLintContext {
     }
     return true;
   }
+
+  bool get isNotDart3 => !isDart3;
 }
