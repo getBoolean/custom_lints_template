@@ -1,5 +1,5 @@
 <!-- omit from toc -->
-# Boolean Lints
+# Custom Lints Template
 
 `custom_lints_template` is a developer tool, designed to help stop common issue and simplify repetetive tasks. It adds various warnings with quick fixes and refactoring options.
 
