@@ -1,18 +1,25 @@
 <!-- omit from toc -->
 # Boolean Lints
 
-`boolean_lints` is a developer tool, designed to help stop common issue and simplify repetetive tasks. It adds various warnings with quick fixes and refactoring options.
+`custom_lints_template` is a developer tool, designed to help stop common issue and simplify repetetive tasks. It adds various warnings with quick fixes and refactoring options.
+
+## Template Usage Checklist
+
+1. [ ] Replace all usages of `custom_lints_template` with your package name.
+2. [ ] Update [pubspec.yaml](./pubspec.yaml) with your package repository and issues links.
+3. [ ] Read the [Contributing Guide](#contributing-guide).
 
 ## Table of Contents
 
+- [Template Usage Checklist](#template-usage-checklist)
 - [Table of Contents](#table-of-contents)
 - [Usage](#usage)
-  - [Installing boolean\_lints](#installing-boolean_lints)
+  - [Installing custom\_lints\_template](#installing-custom_lints_template)
   - [Enabling/disabling lints](#enablingdisabling-lints)
   - [Disable one specific rule](#disable-one-specific-rule)
   - [Disable all lints by default](#disable-all-lints-by-default)
   - [Configuring Lints](#configuring-lints)
-  - [Running boolean\_lints in the terminal/CI](#running-boolean_lints-in-the-terminalci)
+  - [Running custom\_lints\_template in the terminal/CI](#running-custom_lints_template-in-the-terminalci)
 - [Contributing Guide](#contributing-guide)
   - [Creating Lints](#creating-lints)
   - [Creating Assists](#creating-assists)
@@ -21,17 +28,17 @@
 
 ## Usage
 
-### Installing boolean_lints
+### Installing custom_lints_template
 
-`boolean_lints` is implemented using [custom_lint](https://pub.dev/packages/custom_lint). As such, it uses `custom_lint`'s installation logic.  
+`custom_lints_template` is implemented using [custom_lint](https://pub.dev/packages/custom_lint). As such, it uses `custom_lint`'s installation logic.  
 Long story short:
 
-- Add both `boolean_lints` and `custom_lint` to your `pubspec.yaml`:
+- Add both `custom_lints_template` and `custom_lint` to your `pubspec.yaml`:
 
   ```yaml
   dev_dependencies:
     custom_lint:
-    boolean_lints:
+    custom_lints_template:
   ```
 
 - Enable `custom_lint`'s plugin in your `analysis_options.yaml`:
@@ -44,12 +51,12 @@ Long story short:
 
 ### Enabling/disabling lints
 
-By default when installing `boolean_lints`, most of the lints will be enabled.
+By default when installing `custom_lints_template`, most of the lints will be enabled.
 To change this, you have a few options.
 
 ### Disable one specific rule
 
-You may dislike one of the various lint rules offered by `boolean_lints`.
+You may dislike one of the various lint rules offered by `custom_lints_template`.
 In that event, you can explicitly disable this lint rule for your project
 by modifying the `analysis_options.yaml`
 
@@ -105,16 +112,16 @@ custom_lint:
 ### Configuring Lints
 
 Some of the lints have configurations. These can be specified in the `analysis_options.yaml`
-or the `pubspec.yaml` file under the top level key `boolean_lints:`. These options should be
+or the `pubspec.yaml` file under the top level key `custom_lints_template:`. These options should be
 covered in detail in the `All Lints` section.
 
-### Running boolean_lints in the terminal/CI
+### Running custom_lints_template in the terminal/CI
 
-Custom lint rules created by boolean_lints may not show-up in `dart analyze`.
+Custom lint rules created by custom_lints_template may not show-up in `dart analyze`.
 To fix this, you can run a custom command line: `custom_lint`.
 
 Since your project should already have custom_lint installed
-(cf [installing boolean_lints](#installing-boolean_lints)), then you should be
+(cf [installing custom_lints_template](#installing-custom_lints_template)), then you should be
 able to run:
 
 ```sh

@@ -1,8 +1,8 @@
-name: boolean_lints
-description: boolean_lints is a developer tool, designed to help stop common issue and simplify repetetive tasks. It adds various warnings with quick fixes and refactoring options.
+name: custom_lints_template
+description: custom_lints_template is a developer tool, designed to help stop common issue and simplify repetetive tasks. It adds various warnings with quick fixes and refactoring options.
 version: 1.0.0
-repository: https://github.com/getBoolean/boolean_lints
-issue_tracker: https://github.com/getBoolean/boolean_lints/issues
+repository: https://github.com/getBoolean/custom_lints_template
+issue_tracker: https://github.com/getBoolean/custom_lints_template/issues
 
 environment:
   sdk: ^3.0.0
@@ -23,7 +23,7 @@ dev_dependencies:
   build_runner: any
   dart_mappable_builder: ^3.0.2
 
-# boolean_lints:
+# custom_lints_template:
 #   avoid_banned_filenames:
 #     entries:
 #      - "bad[\\.]*.dart"

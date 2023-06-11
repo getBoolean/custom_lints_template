@@ -4,7 +4,7 @@ analyzer:
   plugins:
     - custom_lint
 
-boolean_lints:
+custom_lints_template:
   avoid_banned_filenames:
     entries:
      - "bad[^\\.]*.dart"

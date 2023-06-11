@@ -1,5 +1,5 @@
 {
-	// Place your boolean_lints workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// Place your custom_lints_template workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
 	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
 	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
 	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
@@ -21,8 +21,8 @@
 		"description": "Dart Custom Lint Definition",
 		"body": [
 			"import 'package:analyzer/error/listener.dart';",
-			"import 'package:boolean_lints/src/options.dart';",
-			"import 'package:boolean_lints/src/options_plugin_base.dart';",
+			"import 'package:custom_lints_template/src/options.dart';",
+			"import 'package:custom_lints_template/src/options_plugin_base.dart';",
 			"import 'package:custom_lint_builder/custom_lint_builder.dart';",
 			"",
 			"class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}Rule extends OptionsLintRule {",
@@ -66,7 +66,7 @@
 		"description": "Dart Custom Lint Option",
 		"body": [
 			"import 'package:analyzer/source/source_range.dart';",
-			"import 'package:boolean_lints/src/options_plugin_base.dart';",
+			"import 'package:custom_lints_template/src/options_plugin_base.dart';",
 			"import 'package:custom_lint_builder/custom_lint_builder.dart';",
 			"",
 			"class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}Assist extends OptionsAssist {",
@@ -101,7 +101,7 @@
 		"description": "Dart Custom Lint Option",
 		"body": [
 			"import 'package:analyzer/error/error.dart';",
-			"import 'package:boolean_lints/src/options_plugin_base.dart';",
+			"import 'package:custom_lints_template/src/options_plugin_base.dart';",
 			"import 'package:custom_lint_builder/custom_lint_builder.dart';",
 			"",
 			"class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}Fix extends OptionsFix {",
@@ -137,8 +137,8 @@
 		"description": "Dart Custom Lint Option",
 		"body": [
 			"import 'package:analyzer/error/error.dart';",
-			"import 'package:boolean_lints/src/options.dart';",
-			"import 'package:boolean_lints/src/options/hooks/error_severity_hook.dart';",
+			"import 'package:custom_lints_template/src/options.dart';",
+			"import 'package:custom_lints_template/src/options/hooks/error_severity_hook.dart';",
 			"import 'package:dart_mappable/dart_mappable.dart';",
 			"",
 			"part '${1:${TM_FILENAME_BASE}}.mapper.dart';",

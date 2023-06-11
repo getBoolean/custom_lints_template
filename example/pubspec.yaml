@@ -11,12 +11,12 @@ environment:
 
 dev_dependencies:
   custom_lint: ^0.4.0
-  boolean_lints:
+  custom_lints_template:
     path: ../
   lints: ^2.0.0
   test: ^1.21.0
 
-# boolean_lints:
+# custom_lints_template:
 #   avoid_banned_filenames:
 #     entries:
 #      - "bad[^\\.]*.dart"

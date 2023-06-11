@@ -1,7 +1,7 @@
 import 'package:analyzer/error/listener.dart';
-import 'package:boolean_lints/src/lints/fixes/fix_example.dart';
-import 'package:boolean_lints/src/options.dart';
-import 'package:boolean_lints/src/options_plugin_base.dart';
+import 'package:custom_lints_template/src/lints/fixes/fix_example.dart';
+import 'package:custom_lints_template/src/options.dart';
+import 'package:custom_lints_template/src/options_plugin_base.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 
 class CustomLintExampleRule extends OptionsLintRule {
