@@ -9,5 +9,5 @@ custom_lints_template:
     entries:
      - "bad[^\\.]*.dart"
   avoid_hardcoded_strings:
-    minimum_length: 3
-    severity: info
+    minimum_length: 4
+    severity: warning

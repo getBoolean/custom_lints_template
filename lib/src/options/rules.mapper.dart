@@ -12,6 +12,7 @@ class RulesOptionMapper extends ClassMapperBase<RulesOption> {
   static RulesOptionMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = RulesOptionMapper._());
+      AvoidHardcodedStringsOptionMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -24,17 +25,23 @@ class RulesOptionMapper extends ClassMapperBase<RulesOption> {
   @override
   final String id = 'RulesOption';
 
-  static List<String> _$entries(RulesOption v) => v.entries;
-  static const Field<RulesOption, List<String>> _f$entries =
-      Field('entries', _$entries, opt: true, def: const []);
+  static AvoidHardcodedStringsOption _$avoidHardcodedStrings(RulesOption v) =>
+      v.avoidHardcodedStrings;
+  static const Field<RulesOption, AvoidHardcodedStringsOption>
+      _f$avoidHardcodedStrings = Field(
+          'avoidHardcodedStrings', _$avoidHardcodedStrings,
+          key: 'avoid_hardcoded_strings',
+          opt: true,
+          def: const AvoidHardcodedStringsOption());
 
   @override
   final Map<Symbol, Field<RulesOption, dynamic>> fields = const {
-    #entries: _f$entries,
+    #avoidHardcodedStrings: _f$avoidHardcodedStrings,
   };
 
   static RulesOption _instantiate(DecodingData data) {
-    return RulesOption(entries: data.dec(_f$entries));
+    return RulesOption(
+        avoidHardcodedStrings: data.dec(_f$avoidHardcodedStrings));
   }
 
   @override
@@ -86,8 +93,9 @@ extension RulesOptionValueCopy<$R, $Out>
 
 abstract class RulesOptionCopyWith<$R, $In extends RulesOption, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get entries;
-  $R call({List<String>? entries});
+  AvoidHardcodedStringsOptionCopyWith<$R, AvoidHardcodedStringsOption,
+      AvoidHardcodedStringsOption> get avoidHardcodedStrings;
+  $R call({AvoidHardcodedStringsOption? avoidHardcodedStrings});
   RulesOptionCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -100,15 +108,20 @@ class _RulesOptionCopyWithImpl<$R, $Out>
   late final ClassMapperBase<RulesOption> $mapper =
       RulesOptionMapper.ensureInitialized();
   @override
-  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get entries =>
-      ListCopyWith($value.entries, (v, t) => ObjectCopyWith(v, $identity, t),
-          (v) => call(entries: v));
+  AvoidHardcodedStringsOptionCopyWith<$R, AvoidHardcodedStringsOption,
+          AvoidHardcodedStringsOption>
+      get avoidHardcodedStrings => $value.avoidHardcodedStrings.copyWith
+          .$chain((v) => call(avoidHardcodedStrings: v));
   @override
-  $R call({List<String>? entries}) =>
-      $apply(FieldCopyWithData({if (entries != null) #entries: entries}));
+  $R call({AvoidHardcodedStringsOption? avoidHardcodedStrings}) =>
+      $apply(FieldCopyWithData({
+        if (avoidHardcodedStrings != null)
+          #avoidHardcodedStrings: avoidHardcodedStrings
+      }));
   @override
-  RulesOption $make(CopyWithData data) =>
-      RulesOption(entries: data.get(#entries, or: $value.entries));
+  RulesOption $make(CopyWithData data) => RulesOption(
+      avoidHardcodedStrings:
+          data.get(#avoidHardcodedStrings, or: $value.avoidHardcodedStrings));
 
   @override
   RulesOptionCopyWith<$R2, RulesOption, $Out2> $chain<$R2, $Out2>(
