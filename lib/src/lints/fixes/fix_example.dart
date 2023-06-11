@@ -1,6 +1,6 @@
 import 'package:analyzer/error/error.dart';
-import 'package:custom_lints_template/src/options_plugin_base.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:custom_lints_template/src/options_plugin_base.dart';
 
 class FixExampleFix extends OptionsFix {
   @override

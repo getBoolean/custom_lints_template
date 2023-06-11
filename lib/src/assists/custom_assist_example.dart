@@ -1,6 +1,6 @@
 import 'package:analyzer/source/source_range.dart';
-import 'package:custom_lints_template/src/options_plugin_base.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:custom_lints_template/src/options_plugin_base.dart';
 
 class CustomAssistExampleAssist extends OptionsAssist {
   @override

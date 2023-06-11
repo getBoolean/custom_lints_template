@@ -1,7 +1,7 @@
 import 'package:analyzer/error/error.dart';
+import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:custom_lints_template/src/options/rules.dart';
 import 'package:custom_lints_template/src/utils/object_utils.dart';
-import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:dart_mappable/dart_mappable.dart';
 
 part 'options.mapper.dart';
