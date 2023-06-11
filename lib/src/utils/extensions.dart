@@ -1,5 +1,4 @@
 import 'package:analyzer/error/error.dart';
-import 'package:analyzer/source/source_range.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:pub_semver/pub_semver.dart';
 import 'package:yaml/yaml.dart';
@@ -68,11 +67,6 @@ extension LintCodeCopyWith on LintCode {
         url: url ?? this.url,
         errorSeverity: errorSeverity ?? this.errorSeverity,
       );
-}
-
-/// Source: https://github.com/rrousselGit/riverpod/blob/master/packages/riverpod_lint/lib/src/riverpod_custom_lint.dart
-SourceRange sourceRangeFrom({required int start, required int end}) {
-  return SourceRange(start, end - start);
 }
 
 /// Source: https://github.com/rrousselGit/riverpod/blob/master/packages/riverpod_lint/lib/src/riverpod_custom_lint.dart
