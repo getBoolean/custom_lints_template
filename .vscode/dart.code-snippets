@@ -65,7 +65,7 @@
 	"assist": {
 		"scope": "dart",
 		"prefix": "assist",
-		"description": "Dart Custom Lint Option",
+		"description": "Dart Custom Lint Assist",
 		"body": [
 			"import 'package:analyzer/source/source_range.dart';",
 			"import 'package:custom_lint_builder/custom_lint_builder.dart';",
@@ -101,7 +101,7 @@
 	"fix": {
 		"scope": "dart",
 		"prefix": "fix",
-		"description": "Dart Custom Lint Option",
+		"description": "Dart Custom Lint Fix",
 		"body": [
 			"import 'package:analyzer/error/error.dart';",
 			"import 'package:custom_lint_builder/custom_lint_builder.dart';",
