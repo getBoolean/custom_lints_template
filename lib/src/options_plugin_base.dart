@@ -29,7 +29,7 @@ abstract class OptionsFix extends DartFix with _OptionsMixin {
     AnalysisError analysisError,
     List<AnalysisError> others,
   ) async {
-    final (options: options, rawOptions: _) = await this.options;
+    final options = await this.options;
     if (options.isFileRuleExcluded(resolver.path)) {
       return;
     }
@@ -67,7 +67,7 @@ abstract class OptionsAssist extends DartAssist with _OptionsMixin {
     CustomLintContext context,
     SourceRange target,
   ) async {
-    final (options: options, rawOptions: _) = await this.options;
+    final options = await this.options;
     if (options.isFileRuleExcluded(resolver.path)) {
       return;
     }
@@ -104,11 +104,7 @@ abstract class OptionsLintRule extends DartLintRule with _OptionsMixin {
     ErrorReporter reporter,
     CustomLintContext context,
   ) async {
-    final (options: options, rawOptions: rawOptions) = await this.options;
-    if (rawOptions.isDisabled(code)) {
-      return;
-    }
-
+    final options = await this.options;
     if (options.isFileRuleExcluded(resolver.path)) {
       return;
     }
@@ -127,71 +123,16 @@ abstract class OptionsLintRule extends DartLintRule with _OptionsMixin {
   );
 }
 
-typedef RawOptions = Map<String, dynamic>;
-
-extension _RawOptionsExtension on RawOptions {
-  bool isDisabled(LintCode code) => !isEnabled(code);
-  bool isEnabled(LintCode code) {
-    if (!containsKey('rules')) {
-      return false;
-    }
-
-    final rules = this['rules'];
-    if (rules is List<dynamic>) {
-      final rule = rules.firstWhereOrNull((element) {
-        if (element is String) {
-          return element == code.name;
-        } else if (element is Map<String, dynamic>) {
-          return element.containsKey(code.name);
-        }
-        return false;
-      });
-
-      if (rule is Map<String, dynamic>) {
-        final ruleOptions = rule[code.name];
-        if (ruleOptions is List<dynamic>) {
-          final ruleOptionMap = ruleOptions.convertToMap();
-          if (ruleOptionMap.containsKey('enabled') &&
-              ruleOptionMap['enabled'] is bool) {
-            return ruleOptionMap['enabled'] as bool;
-          }
-          return true;
-        }
-      }
-
-      return rule != null;
-    } else if (rules is Map<String, dynamic>) {
-      if (!rules.containsKey(code.name)) {
-        return false;
-      }
-
-      if (rules[code.name] is! Map<String, dynamic>) {
-        return true;
-      }
-
-      final ruleOptions = rules[code.name] as Map<String, dynamic>;
-      if (ruleOptions.containsKey('enabled') &&
-          ruleOptions['enabled'] is bool) {
-        return ruleOptions['enabled'] as bool;
-      }
-      return true;
-    }
-
-    return false;
-  }
-}
-
 // Mixin on DartLintRule
 mixin _OptionsMixin {
   static Options _options = const Options();
-  static RawOptions _rawOptions = Options.fromMap({}).toMap();
   static bool _loaded = false;
-  static final Completer<({Options options, RawOptions rawOptions})>
-      _completer = Completer<({Options options, RawOptions rawOptions})>();
+  static final Completer<Options>
+      _completer = Completer<Options>();
 
-  Future<({Options options, RawOptions rawOptions})> get options async {
+  Future<Options> get options async {
     if (_completer.isCompleted) {
-      return (options: _options, rawOptions: _rawOptions);
+      return _options;
     }
     return _completer.future;
   }
@@ -210,14 +151,13 @@ mixin _OptionsMixin {
       final rawOptions = await _getLintOptionsMap(dirname(filepath));
       if (rawOptions != null) {
         _options = Options.fromMap(rawOptions);
-        _rawOptions = rawOptions;
       }
     } on FileSystemException catch (_) {}
-    _completer.complete((options: _options, rawOptions: _rawOptions));
+    _completer.complete(_options);
   }
 }
 
-Future<RawOptions?> _getLintOptionsMap(String filepath) async {
+Future<Map<String, dynamic>?> _getLintOptionsMap(String filepath) async {
   final pubspec = Uri.parse(join(filepath, 'pubspec.yaml'));
   final pubspecFile = pubspec.toFile();
   if (pubspecFile.existsSync()) {
@@ -241,7 +181,7 @@ Future<RawOptions?> _getLintOptionsMap(String filepath) async {
   return _getLintOptionsMap(dirname(filepath));
 }
 
-Future<RawOptions?> _findLintOptions(File file) async {
+Future<Map<String, dynamic>?> _findLintOptions(File file) async {
   final contents = await file.readAsString();
   final yamlMap = loadYaml(contents, sourceUrl: file.uri) as YamlMap;
   final dynamic booleanLintsField = yamlMap['custom_lints_template'];
@@ -249,17 +189,4 @@ Future<RawOptions?> _findLintOptions(File file) async {
     return booleanLintsField.toMap();
   }
   return null;
-}
-
-extension _ListToMapExtension on List<dynamic> {
-  Map<String, dynamic> convertToMap() {
-    return fold<Map<String, dynamic>>({}, (map, item) {
-      if (item is String) {
-        map[item] = true;
-      } else if (item is Map<String, dynamic>) {
-        map.addAll(item);
-      }
-      return map;
-    });
-  }
 }

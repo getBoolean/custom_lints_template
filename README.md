@@ -68,10 +68,16 @@ analyzer:
   plugins:
     - custom_lint
 
-custom_lints_template:
+custom_lint:
   rules:
     # Explicitly disable one lint rule
-    - avoid_banned_filenames: false
+    - avoid_hardcoded_strings: false
+
+custom_lints_template:
+  rules:
+    - avoid_hardcoded_strings:
+        - minimum_length: 3
+        - severity: warning
 ```
 
 Note that you can both enable and disable lint rules at once.
