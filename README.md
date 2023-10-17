@@ -68,7 +68,7 @@ analyzer:
   plugins:
     - custom_lint
 
-custom_lint:
+custom_lints_template:
   rules:
     # Explicitly disable one lint rule
     - avoid_banned_filenames: false
@@ -83,7 +83,7 @@ analyzer:
   plugins:
     - custom_lint
 
-custom_lint:
+custom_lints_template:
   rules:
     # Enable one rule
     - avoid_hardcoded_strings
