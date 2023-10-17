@@ -18,11 +18,6 @@ class AvoidHardcodedStringsOptionMapper
     return _instance!;
   }
 
-  static T _guard<T>(T Function(MapperContainer) fn) {
-    ensureInitialized();
-    return fn(MapperContainer.globals);
-  }
-
   @override
   final String id = 'AvoidHardcodedStringsOption';
 
@@ -62,23 +57,25 @@ class AvoidHardcodedStringsOptionMapper
   final Function instantiate = _instantiate;
 
   static AvoidHardcodedStringsOption fromMap(Map<String, dynamic> map) {
-    return _guard((c) => c.fromMap<AvoidHardcodedStringsOption>(map));
+    return ensureInitialized().decodeMap<AvoidHardcodedStringsOption>(map);
   }
 
   static AvoidHardcodedStringsOption fromJson(String json) {
-    return _guard((c) => c.fromJson<AvoidHardcodedStringsOption>(json));
+    return ensureInitialized().decodeJson<AvoidHardcodedStringsOption>(json);
   }
 }
 
 mixin AvoidHardcodedStringsOptionMappable {
   String toJson() {
-    return AvoidHardcodedStringsOptionMapper._guard(
-        (c) => c.toJson(this as AvoidHardcodedStringsOption));
+    return AvoidHardcodedStringsOptionMapper.ensureInitialized()
+        .encodeJson<AvoidHardcodedStringsOption>(
+            this as AvoidHardcodedStringsOption);
   }
 
   Map<String, dynamic> toMap() {
-    return AvoidHardcodedStringsOptionMapper._guard(
-        (c) => c.toMap(this as AvoidHardcodedStringsOption));
+    return AvoidHardcodedStringsOptionMapper.ensureInitialized()
+        .encodeMap<AvoidHardcodedStringsOption>(
+            this as AvoidHardcodedStringsOption);
   }
 
   AvoidHardcodedStringsOptionCopyWith<AvoidHardcodedStringsOption,
@@ -87,20 +84,22 @@ mixin AvoidHardcodedStringsOptionMappable {
           this as AvoidHardcodedStringsOption, $identity, $identity);
   @override
   String toString() {
-    return AvoidHardcodedStringsOptionMapper._guard((c) => c.asString(this));
+    return AvoidHardcodedStringsOptionMapper.ensureInitialized()
+        .stringifyValue(this as AvoidHardcodedStringsOption);
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (runtimeType == other.runtimeType &&
-            AvoidHardcodedStringsOptionMapper._guard(
-                (c) => c.isEqual(this, other)));
+            AvoidHardcodedStringsOptionMapper.ensureInitialized()
+                .isValueEqual(this as AvoidHardcodedStringsOption, other));
   }
 
   @override
   int get hashCode {
-    return AvoidHardcodedStringsOptionMapper._guard((c) => c.hash(this));
+    return AvoidHardcodedStringsOptionMapper.ensureInitialized()
+        .hashValue(this as AvoidHardcodedStringsOption);
   }
 }
 

@@ -17,11 +17,6 @@ class OptionsMapper extends ClassMapperBase<Options> {
     return _instance!;
   }
 
-  static T _guard<T>(T Function(MapperContainer) fn) {
-    ensureInitialized();
-    return fn(MapperContainer.globals);
-  }
-
   @override
   final String id = 'Options';
 
@@ -48,40 +43,43 @@ class OptionsMapper extends ClassMapperBase<Options> {
   final Function instantiate = _instantiate;
 
   static Options fromMap(Map<String, dynamic> map) {
-    return _guard((c) => c.fromMap<Options>(map));
+    return ensureInitialized().decodeMap<Options>(map);
   }
 
   static Options fromJson(String json) {
-    return _guard((c) => c.fromJson<Options>(json));
+    return ensureInitialized().decodeJson<Options>(json);
   }
 }
 
 mixin OptionsMappable {
   String toJson() {
-    return OptionsMapper._guard((c) => c.toJson(this as Options));
+    return OptionsMapper.ensureInitialized()
+        .encodeJson<Options>(this as Options);
   }
 
   Map<String, dynamic> toMap() {
-    return OptionsMapper._guard((c) => c.toMap(this as Options));
+    return OptionsMapper.ensureInitialized()
+        .encodeMap<Options>(this as Options);
   }
 
   OptionsCopyWith<Options, Options, Options> get copyWith =>
       _OptionsCopyWithImpl(this as Options, $identity, $identity);
   @override
   String toString() {
-    return OptionsMapper._guard((c) => c.asString(this));
+    return OptionsMapper.ensureInitialized().stringifyValue(this as Options);
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (runtimeType == other.runtimeType &&
-            OptionsMapper._guard((c) => c.isEqual(this, other)));
+            OptionsMapper.ensureInitialized()
+                .isValueEqual(this as Options, other));
   }
 
   @override
   int get hashCode {
-    return OptionsMapper._guard((c) => c.hash(this));
+    return OptionsMapper.ensureInitialized().hashValue(this as Options);
   }
 }
 

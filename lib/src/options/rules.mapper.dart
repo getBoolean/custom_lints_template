@@ -18,11 +18,6 @@ class RulesOptionMapper extends ClassMapperBase<RulesOption> {
     return _instance!;
   }
 
-  static T _guard<T>(T Function(MapperContainer) fn) {
-    ensureInitialized();
-    return fn(MapperContainer.globals);
-  }
-
   @override
   final String id = 'RulesOption';
 
@@ -58,40 +53,44 @@ class RulesOptionMapper extends ClassMapperBase<RulesOption> {
   final Function instantiate = _instantiate;
 
   static RulesOption fromMap(Map<String, dynamic> map) {
-    return _guard((c) => c.fromMap<RulesOption>(map));
+    return ensureInitialized().decodeMap<RulesOption>(map);
   }
 
   static RulesOption fromJson(String json) {
-    return _guard((c) => c.fromJson<RulesOption>(json));
+    return ensureInitialized().decodeJson<RulesOption>(json);
   }
 }
 
 mixin RulesOptionMappable {
   String toJson() {
-    return RulesOptionMapper._guard((c) => c.toJson(this as RulesOption));
+    return RulesOptionMapper.ensureInitialized()
+        .encodeJson<RulesOption>(this as RulesOption);
   }
 
   Map<String, dynamic> toMap() {
-    return RulesOptionMapper._guard((c) => c.toMap(this as RulesOption));
+    return RulesOptionMapper.ensureInitialized()
+        .encodeMap<RulesOption>(this as RulesOption);
   }
 
   RulesOptionCopyWith<RulesOption, RulesOption, RulesOption> get copyWith =>
       _RulesOptionCopyWithImpl(this as RulesOption, $identity, $identity);
   @override
   String toString() {
-    return RulesOptionMapper._guard((c) => c.asString(this));
+    return RulesOptionMapper.ensureInitialized()
+        .stringifyValue(this as RulesOption);
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (runtimeType == other.runtimeType &&
-            RulesOptionMapper._guard((c) => c.isEqual(this, other)));
+            RulesOptionMapper.ensureInitialized()
+                .isValueEqual(this as RulesOption, other));
   }
 
   @override
   int get hashCode {
-    return RulesOptionMapper._guard((c) => c.hash(this));
+    return RulesOptionMapper.ensureInitialized().hashValue(this as RulesOption);
   }
 }
 
