@@ -45,6 +45,8 @@ class AvoidHardcodedStringsOptionMapper
     #severity: _f$severity,
   };
 
+  @override
+  final MappingHook hook = const MapOrListHook();
   static AvoidHardcodedStringsOption _instantiate(DecodingData data) {
     return AvoidHardcodedStringsOption(
         minimumLength: data.dec(_f$minimumLength),

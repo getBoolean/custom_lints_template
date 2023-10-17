@@ -39,6 +39,8 @@ class CustomLintExampleOptionMapper
     #severity: _f$severity,
   };
 
+  @override
+  final MappingHook hook = const MapOrListHook();
   static CustomLintExampleOption _instantiate(DecodingData data) {
     return CustomLintExampleOption(
         exclude: data.dec(_f$exclude),

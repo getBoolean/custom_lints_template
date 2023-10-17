@@ -68,10 +68,16 @@ analyzer:
   plugins:
     - custom_lint
 
-custom_lints_template:
+custom_lint:
   rules:
     # Explicitly disable one lint rule
-    - avoid_banned_filenames: false
+    - avoid_hardcoded_strings: false
+
+custom_lints_template:
+  rules:
+    avoid_hardcoded_strings:
+      minimum_length: 3
+      severity: warning
 ```
 
 Note that you can both enable and disable lint rules at once.
@@ -83,12 +89,18 @@ analyzer:
   plugins:
     - custom_lint
 
-custom_lints_template:
+custom_lint:
   rules:
     # Enable one rule
     - avoid_hardcoded_strings
     # Disable another
-    - avoid_banned_filenames: false
+    - custom_lint_example: false
+
+custom_lints_template:
+  rules:
+    avoid_hardcoded_strings:
+      minimum_length: 3
+      severity: warning
 ```
 
 ### Disable all lints by default
@@ -110,6 +122,12 @@ custom_lint:
   rules:
     # You can now enable one specific rule in the "rules" list
     - avoid_hardcoded_strings
+
+custom_lints_template:
+  rules:
+    avoid_hardcoded_strings:
+      minimum_length: 3
+      severity: warning
 ```
 
 ### Configuring Lints
@@ -155,7 +173,7 @@ Alternatively, you can globally install `custom_lint`:
 # Install custom_lint for all projects
 dart pub global activate custom_lint
 # run custom_lint's command line in a project
-custom_lint
+dart run custom_lint
 ```
 
 ## All Lint Rules

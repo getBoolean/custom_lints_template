@@ -41,7 +41,7 @@ Info. Avoid hardcoding strings. Use a localization package or append ".hardcoded
 This lint is designed for `flutter_localizations` from the Flutter SDK.
 
 ```yaml
-boolean_lints:
+custom_lints_template:
   rules:
     avoid_hardcoded_strings:
       minimum_length: 0

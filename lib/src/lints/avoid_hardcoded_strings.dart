@@ -20,10 +20,6 @@ class AvoidHardcodedStringsRule extends OptionsLintRule {
     CustomLintContext context,
     Options options,
   ) async {
-    if (options.isFileRuleExcluded(resolver.path)) {
-      return;
-    }
-
     if (options.rules.avoidHardcodedStrings.shouldSkipFile(resolver.path)) {
       return;
     }

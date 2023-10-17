@@ -43,6 +43,8 @@ class RulesOptionMapper extends ClassMapperBase<RulesOption> {
     #customLintExample: _f$customLintExample,
   };
 
+  @override
+  final MappingHook hook = const MapOrListHook();
   static RulesOption _instantiate(DecodingData data) {
     return RulesOption(
         avoidHardcodedStrings: data.dec(_f$avoidHardcodedStrings),

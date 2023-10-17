@@ -29,6 +29,9 @@ abstract class OptionsFix extends DartFix with _OptionsMixin {
     List<AnalysisError> others,
   ) async {
     final options = await this.options;
+    if (options.isFileRuleExcluded(resolver.path)) {
+      return;
+    }
     runWithOptions(resolver, reporter, context, analysisError, others, options);
   }
 
@@ -64,6 +67,9 @@ abstract class OptionsAssist extends DartAssist with _OptionsMixin {
     SourceRange target,
   ) async {
     final options = await this.options;
+    if (options.isFileRuleExcluded(resolver.path)) {
+      return;
+    }
     runWithOptions(resolver, reporter, context, target, options);
   }
 
@@ -98,6 +104,10 @@ abstract class OptionsLintRule extends DartLintRule with _OptionsMixin {
     CustomLintContext context,
   ) async {
     final options = await this.options;
+    if (options.isFileRuleExcluded(resolver.path)) {
+      return;
+    }
+
     runWithOptions(resolver, reporter, context, options);
   }
 
@@ -117,6 +127,7 @@ mixin _OptionsMixin {
   static Options _options = const Options();
   static bool _loaded = false;
   static final Completer<Options> _completer = Completer<Options>();
+
   Future<Options> get options async {
     if (_completer.isCompleted) {
       return _options;
@@ -135,14 +146,12 @@ mixin _OptionsMixin {
     final filepath = resolver.path;
 
     try {
-      final lintOptionsMap = await _getLintOptionsMap(dirname(filepath));
-      if (lintOptionsMap != null) {
-        _options = Options.fromMap(lintOptionsMap);
+      final rawOptions = await _getLintOptionsMap(dirname(filepath));
+      if (rawOptions != null) {
+        _options = Options.fromMap(rawOptions);
       }
-      _completer.complete(_options);
-    } on FileSystemException catch (_) {
-      _completer.complete(const Options());
-    }
+    } on FileSystemException catch (_) {}
+    _completer.complete(_options);
   }
 }
 
@@ -173,7 +182,7 @@ Future<Map<String, dynamic>?> _getLintOptionsMap(String filepath) async {
 Future<Map<String, dynamic>?> _findLintOptions(File file) async {
   final contents = await file.readAsString();
   final yamlMap = loadYaml(contents, sourceUrl: file.uri) as YamlMap;
-  final booleanLintsField = yamlMap['custom_lints_template'];
+  final dynamic booleanLintsField = yamlMap['custom_lints_template'];
   if (booleanLintsField is YamlMap) {
     return booleanLintsField.toMap();
   }
