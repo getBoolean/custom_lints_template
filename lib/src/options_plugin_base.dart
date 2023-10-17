@@ -151,7 +151,7 @@ Future<Map<String, dynamic>?> _getLintOptionsMap(String filepath) async {
   final pubspecFile = pubspec.toFile();
   if (pubspecFile.existsSync()) {
     final analysisOptions = pubspec.resolve('analysis_options.yaml');
-    final analysisOptionsFile = File.fromUri(analysisOptions);
+    final analysisOptionsFile = analysisOptions.toFile();
     if (analysisOptionsFile.existsSync()) {
       final booleanLintsField = await _findLintOptions(analysisOptionsFile);
       if (booleanLintsField != null) {
