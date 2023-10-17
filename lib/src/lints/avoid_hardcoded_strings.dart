@@ -20,7 +20,8 @@ class AvoidHardcodedStringsRule extends OptionsLintRule {
     CustomLintContext context,
     Options options,
   ) async {
-    if (options.isFileRuleExcluded(resolver.path)) {
+    if (options.rules.avoidHardcodedStrings.disabled ||
+        options.isFileRuleExcluded(resolver.path)) {
       return;
     }
 
