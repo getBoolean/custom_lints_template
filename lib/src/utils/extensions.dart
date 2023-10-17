@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:analyzer/error/error.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:path/path.dart' as p;
 import 'package:pub_semver/pub_semver.dart';
 import 'package:yaml/yaml.dart';
-import 'package:path/path.dart' as p;
 
 /// Source: https://github.com/rrousselGit/riverpod/blob/master/packages/riverpod_lint/lib/src/object_utils.dart
 extension ObjectUtils<T> on T? {
