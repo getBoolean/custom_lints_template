@@ -29,6 +29,9 @@ abstract class OptionsFix extends DartFix with _OptionsMixin {
     List<AnalysisError> others,
   ) async {
     final options = await this.options;
+    if (options.isFileRuleExcluded(resolver.path)) {
+      return;
+    }
     runWithOptions(resolver, reporter, context, analysisError, others, options);
   }
 
@@ -64,6 +67,9 @@ abstract class OptionsAssist extends DartAssist with _OptionsMixin {
     SourceRange target,
   ) async {
     final options = await this.options;
+    if (options.isFileRuleExcluded(resolver.path)) {
+      return;
+    }
     runWithOptions(resolver, reporter, context, target, options);
   }
 
