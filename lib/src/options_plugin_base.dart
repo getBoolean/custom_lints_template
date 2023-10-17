@@ -127,8 +127,7 @@ abstract class OptionsLintRule extends DartLintRule with _OptionsMixin {
 mixin _OptionsMixin {
   static Options _options = const Options();
   static bool _loaded = false;
-  static final Completer<Options>
-      _completer = Completer<Options>();
+  static final Completer<Options> _completer = Completer<Options>();
 
   Future<Options> get options async {
     if (_completer.isCompleted) {
