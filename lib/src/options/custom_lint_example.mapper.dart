@@ -31,19 +31,24 @@ class CustomLintExampleOptionMapper
   static const Field<CustomLintExampleOption, ErrorSeverity> _f$severity =
       Field('severity', _$severity,
           opt: true, def: ErrorSeverity.WARNING, hook: ErrorSeverityHook());
+  static bool _$enabled(CustomLintExampleOption v) => v.enabled;
+  static const Field<CustomLintExampleOption, bool> _f$enabled =
+      Field('enabled', _$enabled, opt: true, def: false);
 
   @override
   final Map<Symbol, Field<CustomLintExampleOption, dynamic>> fields = const {
     #exclude: _f$exclude,
     #include: _f$include,
     #severity: _f$severity,
+    #enabled: _f$enabled,
   };
 
   static CustomLintExampleOption _instantiate(DecodingData data) {
     return CustomLintExampleOption(
         exclude: data.dec(_f$exclude),
         include: data.dec(_f$include),
-        severity: data.dec(_f$severity));
+        severity: data.dec(_f$severity),
+        enabled: data.dec(_f$enabled));
   }
 
   @override
@@ -108,7 +113,10 @@ abstract class CustomLintExampleOptionCopyWith<
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get exclude;
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get include;
   $R call(
-      {List<String>? exclude, List<String>? include, ErrorSeverity? severity});
+      {List<String>? exclude,
+      List<String>? include,
+      ErrorSeverity? severity,
+      bool? enabled});
   CustomLintExampleOptionCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -134,17 +142,20 @@ class _CustomLintExampleOptionCopyWithImpl<$R, $Out>
   $R call(
           {List<String>? exclude,
           List<String>? include,
-          ErrorSeverity? severity}) =>
+          ErrorSeverity? severity,
+          bool? enabled}) =>
       $apply(FieldCopyWithData({
         if (exclude != null) #exclude: exclude,
         if (include != null) #include: include,
-        if (severity != null) #severity: severity
+        if (severity != null) #severity: severity,
+        if (enabled != null) #enabled: enabled
       }));
   @override
   CustomLintExampleOption $make(CopyWithData data) => CustomLintExampleOption(
       exclude: data.get(#exclude, or: $value.exclude),
       include: data.get(#include, or: $value.include),
-      severity: data.get(#severity, or: $value.severity));
+      severity: data.get(#severity, or: $value.severity),
+      enabled: data.get(#enabled, or: $value.enabled));
 
   @override
   CustomLintExampleOptionCopyWith<$R2, CustomLintExampleOption, $Out2>

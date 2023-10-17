@@ -35,6 +35,9 @@ class AvoidHardcodedStringsOptionMapper
   static const Field<AvoidHardcodedStringsOption, ErrorSeverity> _f$severity =
       Field('severity', _$severity,
           opt: true, def: ErrorSeverity.INFO, hook: ErrorSeverityHook());
+  static bool _$enabled(AvoidHardcodedStringsOption v) => v.enabled;
+  static const Field<AvoidHardcodedStringsOption, bool> _f$enabled =
+      Field('enabled', _$enabled, opt: true, def: true);
 
   @override
   final Map<Symbol, Field<AvoidHardcodedStringsOption, dynamic>> fields =
@@ -43,6 +46,7 @@ class AvoidHardcodedStringsOptionMapper
     #exclude: _f$exclude,
     #include: _f$include,
     #severity: _f$severity,
+    #enabled: _f$enabled,
   };
 
   static AvoidHardcodedStringsOption _instantiate(DecodingData data) {
@@ -50,7 +54,8 @@ class AvoidHardcodedStringsOptionMapper
         minimumLength: data.dec(_f$minimumLength),
         exclude: data.dec(_f$exclude),
         include: data.dec(_f$include),
-        severity: data.dec(_f$severity));
+        severity: data.dec(_f$severity),
+        enabled: data.dec(_f$enabled));
   }
 
   @override
@@ -120,7 +125,8 @@ abstract class AvoidHardcodedStringsOptionCopyWith<
       {int? minimumLength,
       List<String>? exclude,
       List<String>? include,
-      ErrorSeverity? severity});
+      ErrorSeverity? severity,
+      bool? enabled});
   AvoidHardcodedStringsOptionCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -149,12 +155,14 @@ class _AvoidHardcodedStringsOptionCopyWithImpl<$R, $Out>
           {int? minimumLength,
           List<String>? exclude,
           List<String>? include,
-          ErrorSeverity? severity}) =>
+          ErrorSeverity? severity,
+          bool? enabled}) =>
       $apply(FieldCopyWithData({
         if (minimumLength != null) #minimumLength: minimumLength,
         if (exclude != null) #exclude: exclude,
         if (include != null) #include: include,
-        if (severity != null) #severity: severity
+        if (severity != null) #severity: severity,
+        if (enabled != null) #enabled: enabled
       }));
   @override
   AvoidHardcodedStringsOption $make(CopyWithData data) =>
@@ -162,7 +170,8 @@ class _AvoidHardcodedStringsOptionCopyWithImpl<$R, $Out>
           minimumLength: data.get(#minimumLength, or: $value.minimumLength),
           exclude: data.get(#exclude, or: $value.exclude),
           include: data.get(#include, or: $value.include),
-          severity: data.get(#severity, or: $value.severity));
+          severity: data.get(#severity, or: $value.severity),
+          enabled: data.get(#enabled, or: $value.enabled));
 
   @override
   AvoidHardcodedStringsOptionCopyWith<$R2, AvoidHardcodedStringsOption, $Out2>

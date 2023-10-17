@@ -13,6 +13,7 @@ class AvoidHardcodedStringsOption
     this.exclude = const [],
     this.include = const [],
     this.severity = ErrorSeverity.INFO,
+    this.enabled = true,
   });
   final int minimumLength;
 
@@ -22,6 +23,8 @@ class AvoidHardcodedStringsOption
   final List<String> exclude;
   @override
   final List<String> include;
+  @override
+  final bool enabled;
 
   static const fromJson = AvoidHardcodedStringsOptionMapper.fromJson;
   static const fromMap = AvoidHardcodedStringsOptionMapper.fromMap;
