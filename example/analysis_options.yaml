@@ -9,6 +9,8 @@ custom_lint:
     - avoid_hardcoded_strings: true
 
 custom_lints_template:
+  rules_exclude:
+    - ".*\\excluded.dart"
   rules:
     - avoid_hardcoded_strings:
         - minimum_length: 3
