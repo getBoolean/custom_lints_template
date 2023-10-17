@@ -5,7 +5,7 @@ void tester() {
   final test2 = 'test'.hardcoded;
   // expect_lint: avoid_hardcoded_strings
   final test3 = 'test';
-  final test4 = 'abc';
+  final test4 = 'abc'.hardcoded;
   // expect_lint: avoid_hardcoded_strings
   final test5 = 'test$test4';
   // expect_lint: avoid_hardcoded_strings

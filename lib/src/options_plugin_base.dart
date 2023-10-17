@@ -148,7 +148,7 @@ mixin _OptionsMixin {
 
 Future<Map<String, dynamic>?> _getLintOptionsMap(String filepath) async {
   final pubspec = Uri.parse(join(filepath, 'pubspec.yaml'));
-  final pubspecFile = File.fromUri(pubspec);
+  final pubspecFile = pubspec.toFile();
   if (pubspecFile.existsSync()) {
     final analysisOptions = pubspec.resolve('analysis_options.yaml');
     final analysisOptionsFile = File.fromUri(analysisOptions);

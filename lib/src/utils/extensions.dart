@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:analyzer/error/error.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:pub_semver/pub_semver.dart';
@@ -101,4 +103,8 @@ extension CustomLintContextExtension on CustomLintContext {
   }
 
   bool get isNotDart3 => !isDart3;
+}
+
+extension UriToFileExtension on Uri {
+  File toFile() => File(path);
 }
