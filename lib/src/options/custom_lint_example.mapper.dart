@@ -18,11 +18,6 @@ class CustomLintExampleOptionMapper
     return _instance!;
   }
 
-  static T _guard<T>(T Function(MapperContainer) fn) {
-    ensureInitialized();
-    return fn(MapperContainer.globals);
-  }
-
   @override
   final String id = 'CustomLintExampleOption';
 
@@ -55,23 +50,23 @@ class CustomLintExampleOptionMapper
   final Function instantiate = _instantiate;
 
   static CustomLintExampleOption fromMap(Map<String, dynamic> map) {
-    return _guard((c) => c.fromMap<CustomLintExampleOption>(map));
+    return ensureInitialized().decodeMap<CustomLintExampleOption>(map);
   }
 
   static CustomLintExampleOption fromJson(String json) {
-    return _guard((c) => c.fromJson<CustomLintExampleOption>(json));
+    return ensureInitialized().decodeJson<CustomLintExampleOption>(json);
   }
 }
 
 mixin CustomLintExampleOptionMappable {
   String toJson() {
-    return CustomLintExampleOptionMapper._guard(
-        (c) => c.toJson(this as CustomLintExampleOption));
+    return CustomLintExampleOptionMapper.ensureInitialized()
+        .encodeJson<CustomLintExampleOption>(this as CustomLintExampleOption);
   }
 
   Map<String, dynamic> toMap() {
-    return CustomLintExampleOptionMapper._guard(
-        (c) => c.toMap(this as CustomLintExampleOption));
+    return CustomLintExampleOptionMapper.ensureInitialized()
+        .encodeMap<CustomLintExampleOption>(this as CustomLintExampleOption);
   }
 
   CustomLintExampleOptionCopyWith<CustomLintExampleOption,
@@ -80,20 +75,22 @@ mixin CustomLintExampleOptionMappable {
           this as CustomLintExampleOption, $identity, $identity);
   @override
   String toString() {
-    return CustomLintExampleOptionMapper._guard((c) => c.asString(this));
+    return CustomLintExampleOptionMapper.ensureInitialized()
+        .stringifyValue(this as CustomLintExampleOption);
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (runtimeType == other.runtimeType &&
-            CustomLintExampleOptionMapper._guard(
-                (c) => c.isEqual(this, other)));
+            CustomLintExampleOptionMapper.ensureInitialized()
+                .isValueEqual(this as CustomLintExampleOption, other));
   }
 
   @override
   int get hashCode {
-    return CustomLintExampleOptionMapper._guard((c) => c.hash(this));
+    return CustomLintExampleOptionMapper.ensureInitialized()
+        .hashValue(this as CustomLintExampleOption);
   }
 }
 
