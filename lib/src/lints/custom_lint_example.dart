@@ -19,10 +19,6 @@ class CustomLintExampleRule extends OptionsLintRule {
     CustomLintContext context,
     Options options,
   ) async {
-    if (options.isFileRuleExcluded(resolver.path)) {
-      return;
-    }
-
     if (options.rules.customLintExample.shouldSkipFile(resolver.path)) {
       return;
     }

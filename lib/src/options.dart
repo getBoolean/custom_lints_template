@@ -48,9 +48,6 @@ extension LintCodeCopyWith on LintCode {
 mixin OptionsMixin {
   List<String> get exclude;
   List<String> get include;
-  bool get enabled;
-
-  bool get disabled => !enabled;
 
   bool isFileNotExcluded(String path) {
     return !isFileExcluded(path);
