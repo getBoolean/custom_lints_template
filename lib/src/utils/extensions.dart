@@ -4,6 +4,7 @@ import 'package:analyzer/error/error.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:pub_semver/pub_semver.dart';
 import 'package:yaml/yaml.dart';
+import 'package:path/path.dart' as p;
 
 /// Source: https://github.com/rrousselGit/riverpod/blob/master/packages/riverpod_lint/lib/src/object_utils.dart
 extension ObjectUtils<T> on T? {
@@ -106,5 +107,5 @@ extension CustomLintContextExtension on CustomLintContext {
 }
 
 extension UriToFileExtension on Uri {
-  File toFile() => File(path);
+  File toFile() => File(p.fromUri('file:///$this'));
 }
