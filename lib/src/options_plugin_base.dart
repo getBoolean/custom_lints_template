@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:analyzer/source/source_range.dart';
-import 'package:collection/collection.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:custom_lints_template/src/options.dart';
 import 'package:custom_lints_template/src/utils/extensions.dart';
