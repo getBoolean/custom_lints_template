@@ -6,10 +6,11 @@
 ## Template Usage Checklist
 
 1. [ ] Replace all usages of `custom_lints_template` with your package name.
-2. [ ] Rename [custom_lints_template.dart](lib/custom_lints_template.dart) to `<package-name>.dart`.
-3. [ ] Update [pubspec.yaml](./pubspec.yaml) with your package repository and issues links.
-4. [ ] Read the [Contributing Guide](#contributing-guide).
-5. [ ] Delete this section from the README.
+1. [ ] Rename [custom_lints_template.dart](lib/custom_lints_template.dart) to `<package-name>.dart`.
+1. [ ] Update [pubspec.yaml](./pubspec.yaml) with your package repository and issues links.
+1. [ ] Run `dart run build_runner build -d` to generate the new [dart_mappable](https://pub.dev/packages/dart_mappable) classes.
+1. [ ] Read the [Contributing Guide](#contributing-guide).
+1. [ ] Delete this section from the README.
 
 ## Table of Contents
 
