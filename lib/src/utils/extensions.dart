@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:analyzer/error/error.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:custom_lints_template/src/utils/utils.dart';
 import 'package:path/path.dart' as p;
 import 'package:pub_semver/pub_semver.dart';
 import 'package:yaml/yaml.dart';
@@ -108,4 +109,8 @@ extension CustomLintContextExtension on CustomLintContext {
 
 extension UriToFileExtension on Uri {
   File toFile() => File(p.fromUri('file:///$this'));
+}
+
+extension PathResolverExtension on CustomLintResolver {
+  String get normlizedPath => normalizePath(path);
 }

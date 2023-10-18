@@ -2,6 +2,7 @@ import 'package:analyzer/error/error.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:custom_lints_template/src/options/rules.dart';
 import 'package:custom_lints_template/src/utils/extensions.dart';
+import 'package:custom_lints_template/src/utils/utils.dart';
 import 'package:dart_mappable/dart_mappable.dart';
 
 part 'options.mapper.dart';
@@ -22,7 +23,11 @@ class Options with OptionsMappable {
 
 extension OptionsExtension on Options {
   bool isFileRuleExcluded(String path) {
-    return rulesExclude.toRegExpList().has(path);
+    final pathNormalized = normalizePath(path);
+    final hasMatch = rulesExclude
+        .toRegExpList()
+        .any((regex) => regex.hasMatch(pathNormalized));
+    return hasMatch;
   }
 }
 
@@ -49,29 +54,31 @@ mixin OptionsMixin {
   List<String> get exclude;
   List<String> get include;
 
-  bool isFileNotExcluded(String path) {
-    return !isFileExcluded(path);
+  bool _isFileNotIncluded(String path) {
+    return !_isFileIncluded(path);
   }
 
-  bool isFileExcluded(String path) {
-    return exclude.toRegExpList().has(path);
+  bool _isFileExcluded(String path) {
+    final pathNormalized = normalizePath(path);
+    final hasMatch =
+        exclude.toRegExpList().any((regex) => regex.hasMatch(pathNormalized));
+    return hasMatch;
   }
 
-  bool isFileNotIncluded(String path) {
-    return !isFileIncluded(path);
-  }
-
-  bool isFileIncluded(String path) {
-    return include.toRegExpList().has(path);
+  bool _isFileIncluded(String path) {
+    final pathNormalized = normalizePath(path);
+    final hasMatch =
+        include.toRegExpList().any((regex) => regex.hasMatch(pathNormalized));
+    return hasMatch;
   }
 
   bool get isIncludeOnly => include.isNotEmpty;
 
   bool shouldSkipFile(String path) {
     if (isIncludeOnly) {
-      return isFileNotIncluded(path) || isFileExcluded(path);
+      return _isFileNotIncluded(path) || _isFileExcluded(path);
     }
 
-    return isFileExcluded(path);
+    return _isFileExcluded(path);
   }
 }
