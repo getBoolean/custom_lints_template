@@ -1,9 +1,9 @@
-import 'package:analyzer/error/error.dart';
-import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:custom_lints_template/src/options/rules.dart';
 import 'package:custom_lints_template/src/utils/extensions.dart';
 import 'package:custom_lints_template/src/utils/utils.dart';
 import 'package:dart_mappable/dart_mappable.dart';
+
+export 'utils/extensions.dart';
 
 part 'options.mapper.dart';
 
@@ -29,25 +29,6 @@ extension OptionsExtension on Options {
         .any((regex) => regex.hasMatch(pathNormalized));
     return hasMatch;
   }
-}
-
-extension LintCodeCopyWith on LintCode {
-  LintCode copyWith({
-    String? name,
-    String? problemMessage,
-    String? correctionMessage,
-    String? uniqueName,
-    String? url,
-    ErrorSeverity? errorSeverity,
-  }) =>
-      LintCode(
-        name: name ?? this.name,
-        problemMessage: problemMessage ?? this.problemMessage,
-        correctionMessage: correctionMessage ?? this.correctionMessage,
-        uniqueName: uniqueName ?? this.uniqueName,
-        url: url ?? this.url,
-        errorSeverity: errorSeverity ?? this.errorSeverity,
-      );
 }
 
 mixin OptionsMixin {
