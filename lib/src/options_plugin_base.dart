@@ -4,8 +4,10 @@ import 'dart:io';
 import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:analyzer/source/source_range.dart';
+import 'package:collection/collection.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:custom_lints_template/src/options.dart';
+import 'package:custom_lints_template/src/utils/utils.dart';
 import 'package:path/path.dart';
 import 'package:yaml/yaml.dart';
 
@@ -15,7 +17,7 @@ abstract class OptionsFix extends DartFix with _OptionsMixin {
     CustomLintResolver resolver,
     CustomLintContext context,
   ) async {
-    await _setUp(resolver, context);
+    _setUp(resolver, context);
     await super.startUp(resolver, context);
   }
 
@@ -27,7 +29,7 @@ abstract class OptionsFix extends DartFix with _OptionsMixin {
     AnalysisError analysisError,
     List<AnalysisError> others,
   ) async {
-    final options = await this.options;
+    final options = _getOptions(resolver.path);
     runWithOptions(resolver, reporter, context, analysisError, others, options);
   }
 
@@ -51,7 +53,7 @@ abstract class OptionsAssist extends DartAssist with _OptionsMixin {
     CustomLintContext context,
     SourceRange target,
   ) async {
-    await _setUp(resolver, context);
+    _setUp(resolver, context);
     await super.startUp(resolver, context, target);
   }
 
@@ -62,7 +64,7 @@ abstract class OptionsAssist extends DartAssist with _OptionsMixin {
     CustomLintContext context,
     SourceRange target,
   ) async {
-    final options = await this.options;
+    final options = _getOptions(resolver.path);
     runWithOptions(resolver, reporter, context, target, options);
   }
 
@@ -86,7 +88,7 @@ abstract class OptionsLintRule extends DartLintRule with _OptionsMixin {
     CustomLintResolver resolver,
     CustomLintContext context,
   ) async {
-    await _setUp(resolver, context);
+    _setUp(resolver, context);
     await super.startUp(resolver, context);
   }
 
@@ -96,7 +98,7 @@ abstract class OptionsLintRule extends DartLintRule with _OptionsMixin {
     ErrorReporter reporter,
     CustomLintContext context,
   ) async {
-    final options = await this.options;
+    final options = _getOptions(resolver.path);
     if (options.isFileRuleExcluded(resolver.path)) {
       return;
     }
@@ -117,54 +119,57 @@ abstract class OptionsLintRule extends DartLintRule with _OptionsMixin {
 
 // Mixin on DartLintRule
 mixin _OptionsMixin {
-  // TODO: #8 Refactor this to support multiple nested packages with different analysis_options.yaml files
-  static Options _options = const Options();
-  static bool _loaded = false;
-  static final Completer<Options> _completer = Completer<Options>();
+  /// pubspec/analysis_options paths -> options
+  static final Map<String, Options> _options = {};
 
-  Future<Options> get options async {
-    if (_completer.isCompleted) {
-      return _options;
-    }
-    return _completer.future;
-  }
+  Options _getOptions(String path) =>
+      _options.entries
+          .firstWhereOrNull((entry) => isParent(entry.key, path))
+          ?.value ??
+      const Options();
 
-  Future<void> _setUp(
+  void _setUp(
     CustomLintResolver resolver,
     CustomLintContext context,
-  ) async {
-    // Only load the options once
-    if (_loaded) return;
-    _loaded = true;
-
+  ) {
     final filepath = resolver.path;
 
-    try {
-      final rawOptions = await _getLintOptionsMap(dirname(filepath));
-      if (rawOptions != null) {
-        _options = Options.fromMap(rawOptions);
-      }
-    } on FileSystemException catch (_) {}
-    _completer.complete(_options);
+    // Only load the options once if possible
+    final existingOptionsMap = _options.entries
+        .firstWhereOrNull((entry) => isParent(entry.key, filepath));
+    if (existingOptionsMap != null) {
+      print('Found options for $filepath in ${existingOptionsMap.key}');
+      return;
+    }
+
+    print('Getting options for $filepath');
+
+    final record = _getLintOptionsMap(dirname(filepath));
+    if (record != null) {
+      final (optionsPath, rawOptions) = record;
+      _options.putIfAbsent(optionsPath, () => Options.fromMap(rawOptions));
+    } else {
+      _options.putIfAbsent(filepath, Options.new);
+    }
   }
 }
 
-Future<Map<String, dynamic>?> _getLintOptionsMap(String filepath) async {
+(String, Map<String, dynamic>)? _getLintOptionsMap(String filepath) {
   final pubspec = Uri.parse(join(filepath, 'pubspec.yaml'));
   final pubspecFile = pubspec.toFile();
   if (pubspecFile.existsSync()) {
     final analysisOptions = pubspec.resolve('analysis_options.yaml');
     final analysisOptionsFile = analysisOptions.toFile();
     if (analysisOptionsFile.existsSync()) {
-      final lintsField = await _findLintOptions(analysisOptionsFile);
+      final lintsField = _findLintOptions(analysisOptionsFile);
       if (lintsField != null) {
-        return lintsField;
+        return (filepath, lintsField);
       }
     }
 
-    final lintsField = await _findLintOptions(pubspecFile);
+    final lintsField = _findLintOptions(pubspecFile);
     if (lintsField != null) {
-      return lintsField;
+      return (filepath, lintsField);
     }
   }
   if (dirname(filepath) == filepath) {
@@ -173,8 +178,8 @@ Future<Map<String, dynamic>?> _getLintOptionsMap(String filepath) async {
   return _getLintOptionsMap(dirname(filepath));
 }
 
-Future<Map<String, dynamic>?> _findLintOptions(File file) async {
-  final contents = await file.readAsString();
+Map<String, dynamic>? _findLintOptions(File file) {
+  final contents = file.readAsStringSync();
   final yamlMap = loadYaml(contents, sourceUrl: file.uri) as YamlMap;
   final dynamic booleanLintsField = yamlMap['custom_lints_template'];
   if (booleanLintsField is YamlMap) {
