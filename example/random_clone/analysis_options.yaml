@@ -1,0 +1,17 @@
+include: package:lints/recommended.yaml
+
+analyzer:
+  plugins:
+    - custom_lint
+
+custom_lint:
+  rules:
+    - avoid_hardcoded_strings: true
+
+custom_lints_template:
+  rules_exclude:
+    - ".*excluded\\.dart"
+  rules:
+    - avoid_hardcoded_strings:
+        - minimum_length: 3
+        - severity: warning

@@ -9,3 +9,7 @@ SourceRange sourceRangeFrom({required int start, required int end}) {
 String normalizePath(String path) {
   return p.posix.normalize(path.replaceAll(r'\', '/'));
 }
+
+bool isParent(String parent, String child) {
+  return p.isWithin(parent, child);
+}
