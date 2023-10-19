@@ -11,5 +11,5 @@ String normalizePath(String path) {
 }
 
 bool isParent(String parent, String child) {
-  return p.canonicalize(child).startsWith(p.canonicalize(parent));
+  return p.isWithin(parent, child);
 }
