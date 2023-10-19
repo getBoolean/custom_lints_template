@@ -117,6 +117,7 @@ abstract class OptionsLintRule extends DartLintRule with _OptionsMixin {
 
 // Mixin on DartLintRule
 mixin _OptionsMixin {
+  // TODO: #8 Refactor this to support multiple nested packages with different analysis_options.yaml files
   static Options _options = const Options();
   static bool _loaded = false;
   static final Completer<Options> _completer = Completer<Options>();
@@ -155,15 +156,15 @@ Future<Map<String, dynamic>?> _getLintOptionsMap(String filepath) async {
     final analysisOptions = pubspec.resolve('analysis_options.yaml');
     final analysisOptionsFile = analysisOptions.toFile();
     if (analysisOptionsFile.existsSync()) {
-      final booleanLintsField = await _findLintOptions(analysisOptionsFile);
-      if (booleanLintsField != null) {
-        return booleanLintsField;
+      final lintsField = await _findLintOptions(analysisOptionsFile);
+      if (lintsField != null) {
+        return lintsField;
       }
     }
 
-    final booleanLintsField = await _findLintOptions(pubspecFile);
-    if (booleanLintsField != null) {
-      return booleanLintsField;
+    final lintsField = await _findLintOptions(pubspecFile);
+    if (lintsField != null) {
+      return lintsField;
     }
   }
   if (dirname(filepath) == filepath) {
