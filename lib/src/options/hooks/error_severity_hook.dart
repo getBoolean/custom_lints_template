@@ -22,7 +22,7 @@ class ErrorSeverityHook extends MappingHook {
       'warning' => ErrorSeverity.WARNING,
       'error' => ErrorSeverity.ERROR,
       'none' => ErrorSeverity.NONE,
-      _ => ErrorSeverity.INFO,
+      _ => null,
     };
   }
 }

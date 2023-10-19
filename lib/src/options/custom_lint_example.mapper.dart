@@ -27,10 +27,9 @@ class CustomLintExampleOptionMapper
   static List<String> _$include(CustomLintExampleOption v) => v.include;
   static const Field<CustomLintExampleOption, List<String>> _f$include =
       Field('include', _$include, opt: true, def: const []);
-  static ErrorSeverity _$severity(CustomLintExampleOption v) => v.severity;
+  static ErrorSeverity? _$severity(CustomLintExampleOption v) => v.severity;
   static const Field<CustomLintExampleOption, ErrorSeverity> _f$severity =
-      Field('severity', _$severity,
-          opt: true, def: ErrorSeverity.WARNING, hook: ErrorSeverityHook());
+      Field('severity', _$severity, opt: true, hook: ErrorSeverityHook());
 
   @override
   final Map<Symbol, Field<CustomLintExampleOption, dynamic>> fields = const {
@@ -136,11 +135,11 @@ class _CustomLintExampleOptionCopyWithImpl<$R, $Out>
   $R call(
           {List<String>? exclude,
           List<String>? include,
-          ErrorSeverity? severity}) =>
+          Object? severity = $none}) =>
       $apply(FieldCopyWithData({
         if (exclude != null) #exclude: exclude,
         if (include != null) #include: include,
-        if (severity != null) #severity: severity
+        if (severity != $none) #severity: severity
       }));
   @override
   CustomLintExampleOption $make(CopyWithData data) => CustomLintExampleOption(

@@ -12,7 +12,7 @@ class CustomLintExampleOption
   const CustomLintExampleOption({
     this.exclude = const [],
     this.include = const [],
-    this.severity = ErrorSeverity.WARNING,
+    this.severity,
   });
 
   @override
@@ -22,7 +22,7 @@ class CustomLintExampleOption
   final List<String> include;
 
   @MappableField(hook: ErrorSeverityHook())
-  final ErrorSeverity severity;
+  final ErrorSeverity? severity;
 
   static const fromJson = CustomLintExampleOptionMapper.fromJson;
   static const fromMap = CustomLintExampleOptionMapper.fromMap;

@@ -13,12 +13,12 @@ class AvoidHardcodedStringsOption
     this.minimumLength = 0,
     this.exclude = const [],
     this.include = const [],
-    this.severity = ErrorSeverity.INFO,
+    this.severity,
   });
   final int minimumLength;
 
   @MappableField(hook: ErrorSeverityHook())
-  final ErrorSeverity severity;
+  final ErrorSeverity? severity;
   @override
   final List<String> exclude;
   @override

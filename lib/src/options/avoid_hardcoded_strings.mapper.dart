@@ -31,10 +31,9 @@ class AvoidHardcodedStringsOptionMapper
   static List<String> _$include(AvoidHardcodedStringsOption v) => v.include;
   static const Field<AvoidHardcodedStringsOption, List<String>> _f$include =
       Field('include', _$include, opt: true, def: const []);
-  static ErrorSeverity _$severity(AvoidHardcodedStringsOption v) => v.severity;
+  static ErrorSeverity? _$severity(AvoidHardcodedStringsOption v) => v.severity;
   static const Field<AvoidHardcodedStringsOption, ErrorSeverity> _f$severity =
-      Field('severity', _$severity,
-          opt: true, def: ErrorSeverity.INFO, hook: ErrorSeverityHook());
+      Field('severity', _$severity, opt: true, hook: ErrorSeverityHook());
 
   @override
   final Map<Symbol, Field<AvoidHardcodedStringsOption, dynamic>> fields =
@@ -151,12 +150,12 @@ class _AvoidHardcodedStringsOptionCopyWithImpl<$R, $Out>
           {int? minimumLength,
           List<String>? exclude,
           List<String>? include,
-          ErrorSeverity? severity}) =>
+          Object? severity = $none}) =>
       $apply(FieldCopyWithData({
         if (minimumLength != null) #minimumLength: minimumLength,
         if (exclude != null) #exclude: exclude,
         if (include != null) #include: include,
-        if (severity != null) #severity: severity
+        if (severity != $none) #severity: severity
       }));
   @override
   AvoidHardcodedStringsOption $make(CopyWithData data) =>

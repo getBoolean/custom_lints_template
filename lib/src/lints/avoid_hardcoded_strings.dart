@@ -26,7 +26,9 @@ class AvoidHardcodedStringsRule extends OptionsLintRule {
 
     final minimumLength = options.rules.avoidHardcodedStrings.minimumLength;
     final severity = options.rules.avoidHardcodedStrings.severity;
-    final code = this.code.copyWith(errorSeverity: severity);
+    final code = this.code.copyWith(
+          errorSeverity: severity ?? this.code.errorSeverity,
+        );
 
     context.registry.addSimpleStringLiteral((node) {
       if (node.value.length <= minimumLength) {
