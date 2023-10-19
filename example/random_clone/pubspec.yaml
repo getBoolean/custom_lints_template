@@ -1,0 +1,25 @@
+name: random_clone
+description: A sample command-line application.
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ^3.0.3
+
+# Add regular dependencies here.
+# dependencies:
+
+dev_dependencies:
+  custom_lint: ^0.5.3
+  custom_lints_template:
+    path: ../../
+  lints: ^2.0.0
+  test: ^1.21.0
+# custom_lints_template:
+#   rules:
+#     avoid_banned_filenames:
+#       entries:
+#       - "bad[^\\.]*.dart"
+#     avoid_hardcoded_strings:
+#       minimum_length: 4
+#       severity: warning

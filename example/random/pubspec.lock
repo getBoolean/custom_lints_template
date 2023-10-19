@@ -132,7 +132,7 @@ packages:
   custom_lints_template:
     dependency: "direct dev"
     description:
-      path: ".."
+      path: "../.."
       relative: true
     source: path
     version: "1.0.0"
