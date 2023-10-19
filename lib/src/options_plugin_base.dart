@@ -138,11 +138,11 @@ mixin _OptionsMixin {
     final existingOptionsMap = _options.entries
         .firstWhereOrNull((entry) => isParent(entry.key, filepath));
     if (existingOptionsMap != null) {
-      print('Found options for $filepath in ${existingOptionsMap.key}');
+      // print('Found options for $filepath in ${existingOptionsMap.key}');
       return;
     }
 
-    print('Getting options for $filepath');
+    // print('Getting options for $filepath');
 
     final record = _getLintOptionsMap(dirname(filepath));
     if (record != null) {
