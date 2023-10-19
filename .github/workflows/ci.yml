@@ -28,7 +28,10 @@ jobs:
           architecture: x64
       
       - name: Get Packages
-        run: dart pub get
+        run: |
+          dart pub get
+          dart pub get -C example/random
+          dart pub get -C example/random_clone
 
       - name: Verify Formatting
         run: dart format --set-exit-if-changed .
@@ -40,4 +43,11 @@ jobs:
         run: dart test
 
       - name: Run Custom Lints
-        run: cd example && dart run custom_lint
+        run: |
+          cd example/random
+          dart run custom_lint
+          cd ../..
+
+          cd example/random_clone
+          dart run custom_lint
+          cd ../..
