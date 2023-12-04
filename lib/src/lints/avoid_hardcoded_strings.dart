@@ -3,6 +3,7 @@ import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:custom_lints_template/src/lints/fixes/avoid_hardcoded_strings.dart';
 import 'package:custom_lints_template/src/options.dart';
 import 'package:custom_lints_template/src/options_plugin_base.dart';
+import 'package:custom_lints_template/src/utils/path_utils.dart';
 
 class AvoidHardcodedStringsRule extends OptionsLintRule {
   AvoidHardcodedStringsRule() : super(code: _code);
@@ -20,7 +21,11 @@ class AvoidHardcodedStringsRule extends OptionsLintRule {
     CustomLintContext context,
     Options options,
   ) async {
-    if (options.rules.avoidHardcodedStrings.shouldSkipFile(resolver.path)) {
+    if (shouldSkipFile(
+      includeGlobs: options.rules.avoidHardcodedStrings.include,
+      excludeGlobs: options.rules.avoidHardcodedStrings.exclude,
+      path: resolver.path,
+    )) {
       return;
     }
 

@@ -3,6 +3,7 @@ import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:custom_lints_template/src/lints/fixes/fix_example.dart';
 import 'package:custom_lints_template/src/options.dart';
 import 'package:custom_lints_template/src/options_plugin_base.dart';
+import 'package:custom_lints_template/src/utils/path_utils.dart';
 
 class CustomLintExampleRule extends OptionsLintRule {
   CustomLintExampleRule() : super(code: _code);
@@ -19,7 +20,11 @@ class CustomLintExampleRule extends OptionsLintRule {
     CustomLintContext context,
     Options options,
   ) async {
-    if (options.rules.customLintExample.shouldSkipFile(resolver.path)) {
+    if (shouldSkipFile(
+      includeGlobs: options.rules.customLintExample.include,
+      excludeGlobs: options.rules.customLintExample.exclude,
+      path: resolver.path,
+    )) {
       return;
     }
 

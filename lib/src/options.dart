@@ -30,36 +30,3 @@ extension OptionsExtension on Options {
     return hasMatch;
   }
 }
-
-mixin OptionsMixin {
-  List<String> get exclude;
-  List<String> get include;
-
-  bool _isFileNotIncluded(String path) {
-    return !_isFileIncluded(path);
-  }
-
-  bool _isFileExcluded(String path) {
-    final pathNormalized = normalizePath(path);
-    final hasMatch =
-        exclude.toRegExpList().any((regex) => regex.hasMatch(pathNormalized));
-    return hasMatch;
-  }
-
-  bool _isFileIncluded(String path) {
-    final pathNormalized = normalizePath(path);
-    final hasMatch =
-        include.toRegExpList().any((regex) => regex.hasMatch(pathNormalized));
-    return hasMatch;
-  }
-
-  bool get isIncludeOnly => include.isNotEmpty;
-
-  bool shouldSkipFile(String path) {
-    if (isIncludeOnly) {
-      return _isFileNotIncluded(path) || _isFileExcluded(path);
-    }
-
-    return _isFileExcluded(path);
-  }
-}
