@@ -1,16 +1,13 @@
 import 'package:analyzer/source/source_range.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
-import 'package:custom_lints_template/src/options.dart';
-import 'package:custom_lints_template/src/options_plugin_base.dart';
 
-class CustomAssistExampleAssist extends OptionsAssist {
+class CustomAssistExample extends DartAssist {
   @override
-  Future<void> runWithOptions(
+  Future<void> run(
     CustomLintResolver resolver,
     ChangeReporter reporter,
     CustomLintContext context,
     SourceRange target,
-    Options options,
   ) async {
     context.registry.addVariableDeclaration((node) {
       // Check that the visited node is under the cursor
@@ -18,7 +15,7 @@ class CustomAssistExampleAssist extends OptionsAssist {
 
       final changeBuilder = reporter.createChangeBuilder(
         priority: 1,
-        message: 'Custom fix for code',
+        message: 'Custom assist for code',
       );
       changeBuilder.addDartFileEdit((builder) {
         // TODO: <implement change to refactor the code>

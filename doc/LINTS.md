@@ -10,25 +10,15 @@
 
 ## Configuring Lints
 
-All lints have configuration options available, these can be specified in the `analysis_options.yaml`
+Some lints have configuration options available, these can be specified in the `analysis_options.yaml`
 or the `pubspec.yaml` file, an example is shown below. Each lint may also have additional options
 available that are covered in their respective sections below.
 
-All lints have the following options:
-
-- `severity`: This can be set to `none`, `info`, `warning` or `error`.
-- `include`: Only lint files matching these regular expressions.
-- `exclude`: Skip linting files matching these regular expressions.
-
 ```yaml
-custom_lints_template:
+custom_lint:
   rules:
-    example_lint_code:
+    - avoid_hardcoded_strings:
       severity: info
-      include:
-        - "lib/.*\\.dart"
-      exclude:
-        - "lib/.*_temp\\.dart"
 ```
 
 ## Dart
@@ -40,12 +30,21 @@ custom_lints_template:
 Info. Avoid hardcoding strings. Use a localization package or append ".hardcoded" to the string to suppress this message.
 This lint is designed for `flutter_localizations` from the Flutter SDK.
 
+- `minimum_length`: The minimum length of a string to be considered for this lint.
+- `include`: Only lint files matching these glob expressions.
+- `exclude`: Skip linting files matching these glob expressions.
+- `severity`: This can be set to `none`, `info`, `warning` or `error`.
+
 ```yaml
 custom_lints_template:
   rules:
-    avoid_hardcoded_strings:
+    - avoid_hardcoded_strings:
       minimum_length: 0
       severity: info
+      include:
+        - "lib/*.dart"
+      exclude:
+        - "lib/*_temp.dart"
 ```
 
 **Good**:
