@@ -6,7 +6,7 @@ PluginBase createPlugin() => _CustomLintTemplatePlugin();
 class _CustomLintTemplatePlugin extends PluginBase {
   @override
   List<LintRule> getLintRules(CustomLintConfigs configs) => [
-        AvoidHardcodedStringsRule(),
+        AvoidHardcodedStringsRule(configs),
       ];
 
   @override

@@ -1,34 +1,45 @@
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:custom_lints_template/src/lints/fixes/fix_example.dart';
-import 'package:custom_lints_template/src/options.dart';
-import 'package:custom_lints_template/src/options_plugin_base.dart';
+import 'package:custom_lints_template/src/models/options_lint_rule.dart';
+import 'package:custom_lints_template/src/models/rule_config.dart';
+import 'package:custom_lints_template/src/options/custom_lint_example.dart';
+import 'package:custom_lints_template/src/utils/extensions.dart';
 import 'package:custom_lints_template/src/utils/path_utils.dart';
 
-class CustomLintExampleRule extends OptionsLintRule {
-  CustomLintExampleRule() : super(code: _code);
+class CustomLintExampleRule extends OptionsLintRule<CustomLintExampleOption> {
+  /// Creates a new instance of [OptionsLintRule]
+  /// based on the lint configuration.
+  CustomLintExampleRule(
+    CustomLintConfigs configs,
+  ) : super(RuleConfig(
+          configs: configs,
+          name: lintName,
+          paramsParser: CustomLintExampleOption.fromMap,
+          problemMessage: (_) =>
+              'Avoid hardcoding strings. Use a localization package or append ".hardcoded" to the string to suppress this message.',
+        ));
 
-  static const _code = LintCode(
-    name: 'custom_lint_example',
-    problemMessage: 'This is the description of our custom lint',
-  );
+  /// The [LintCode] of this lint rule that represents
+  /// the error whether we use bad formatted double literals.
+  static const String lintName = 'avoid_hardcoded_strings';
 
   @override
-  Future<void> runWithOptions(
+  Future<void> run(
     CustomLintResolver resolver,
     ErrorReporter reporter,
     CustomLintContext context,
-    Options options,
   ) async {
+    final parameters = config.parameters;
     if (shouldSkipFile(
-      includeGlobs: options.rules.customLintExample.include,
-      excludeGlobs: options.rules.customLintExample.exclude,
+      includeGlobs: parameters.include,
+      excludeGlobs: parameters.exclude,
       path: resolver.path,
     )) {
       return;
     }
 
-    final severity = options.rules.customLintExample.severity;
+    final severity = parameters.severity;
     final code = this.code.copyWith(errorSeverity: severity);
     context.registry.addVariableDeclaration((node) {
       // TODO: Check if the error should be reported
@@ -37,5 +48,5 @@ class CustomLintExampleRule extends OptionsLintRule {
   }
 
   @override
-  List<Fix> getFixes() => [FixExampleFix()];
+  List<Fix> getFixes() => [FixExampleFix(config)];
 }

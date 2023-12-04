@@ -9,16 +9,17 @@ part 'avoid_hardcoded_strings.mapper.dart';
 class AvoidHardcodedStringsOption with AvoidHardcodedStringsOptionMappable {
   const AvoidHardcodedStringsOption({
     this.minimumLength = 0,
-    this.exclude = const [],
-    this.include = const [],
+    this.excludes = const [],
+    this.includes = const [],
     this.severity,
   });
+
   final int minimumLength;
 
   @MappableField(hook: ErrorSeverityHook())
   final ErrorSeverity? severity;
-  final List<String> exclude;
-  final List<String> include;
+  final List<String> excludes;
+  final List<String> includes;
 
   static const fromJson = AvoidHardcodedStringsOptionMapper.fromJson;
   static const fromMap = AvoidHardcodedStringsOptionMapper.fromMap;

@@ -1,36 +1,55 @@
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:custom_lints_template/src/lints/fixes/avoid_hardcoded_strings.dart';
-import 'package:custom_lints_template/src/options.dart';
-import 'package:custom_lints_template/src/options_plugin_base.dart';
+import 'package:custom_lints_template/src/models/options_lint_rule.dart';
+import 'package:custom_lints_template/src/models/rule_config.dart';
+import 'package:custom_lints_template/src/options/avoid_hardcoded_strings.dart';
+import 'package:custom_lints_template/src/utils/extensions.dart';
 import 'package:custom_lints_template/src/utils/path_utils.dart';
 
-class AvoidHardcodedStringsRule extends OptionsLintRule {
-  AvoidHardcodedStringsRule() : super(code: _code);
+class AvoidHardcodedStringsRule
+    extends OptionsLintRule<AvoidHardcodedStringsOption> {
+  /// Creates a new instance of [AvoidHardcodedStringsRule]
+  /// based on the lint configuration.
+  AvoidHardcodedStringsRule(
+    CustomLintConfigs configs,
+  ) : super(RuleConfig(
+          configs: configs,
+          name: lintName,
+          paramsParser: AvoidHardcodedStringsOption.fromMap,
+          problemMessage: (_) =>
+              'Avoid hardcoding strings. Use a localization package or append ".hardcoded" to the string to suppress this message.',
+        ));
 
-  static const _code = LintCode(
-    name: 'avoid_hardcoded_strings',
-    problemMessage:
-        'Avoid hardcoding strings. Use a localization package or append ".hardcoded" to the string to suppress this message.',
-  );
+  /// The [LintCode] of this lint rule that represents
+  /// the error whether we use bad formatted double literals.
+  static const String lintName = 'avoid_hardcoded_strings';
 
   @override
-  Future<void> runWithOptions(
+  Future<void> run(
     CustomLintResolver resolver,
     ErrorReporter reporter,
     CustomLintContext context,
-    Options options,
   ) async {
+    final rootPath = (await resolver.getResolvedUnitResult())
+        .session
+        .analysisContext
+        .contextRoot
+        .root
+        .path;
+
+    final parameters = config.parameters;
     if (shouldSkipFile(
-      includeGlobs: options.rules.avoidHardcodedStrings.include,
-      excludeGlobs: options.rules.avoidHardcodedStrings.exclude,
+      includeGlobs: parameters.includes,
+      excludeGlobs: parameters.excludes,
       path: resolver.path,
+      rootPath: rootPath,
     )) {
       return;
     }
 
-    final minimumLength = options.rules.avoidHardcodedStrings.minimumLength;
-    final severity = options.rules.avoidHardcodedStrings.severity;
+    final minimumLength = parameters.minimumLength;
+    final severity = parameters.severity;
     final code = this.code.copyWith(
           errorSeverity: severity ?? this.code.errorSeverity,
         );
@@ -67,6 +86,6 @@ class AvoidHardcodedStringsRule extends OptionsLintRule {
 
   @override
   List<Fix> getFixes() => [
-        AvoidHardcodedStringsFix(),
+        AvoidHardcodedStringsFix(config),
       ];
 }

@@ -1,7 +1,8 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element
+// ignore_for_file: unused_element, unnecessary_cast
+// ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
 
 part of 'avoid_hardcoded_strings.dart';
 
@@ -25,12 +26,12 @@ class AvoidHardcodedStringsOptionMapper
   static const Field<AvoidHardcodedStringsOption, int> _f$minimumLength = Field(
       'minimumLength', _$minimumLength,
       key: 'minimum_length', opt: true, def: 0);
-  static List<String> _$exclude(AvoidHardcodedStringsOption v) => v.exclude;
-  static const Field<AvoidHardcodedStringsOption, List<String>> _f$exclude =
-      Field('exclude', _$exclude, opt: true, def: const []);
-  static List<String> _$include(AvoidHardcodedStringsOption v) => v.include;
-  static const Field<AvoidHardcodedStringsOption, List<String>> _f$include =
-      Field('include', _$include, opt: true, def: const []);
+  static List<String> _$excludes(AvoidHardcodedStringsOption v) => v.excludes;
+  static const Field<AvoidHardcodedStringsOption, List<String>> _f$excludes =
+      Field('excludes', _$excludes, opt: true, def: const []);
+  static List<String> _$includes(AvoidHardcodedStringsOption v) => v.includes;
+  static const Field<AvoidHardcodedStringsOption, List<String>> _f$includes =
+      Field('includes', _$includes, opt: true, def: const []);
   static ErrorSeverity? _$severity(AvoidHardcodedStringsOption v) => v.severity;
   static const Field<AvoidHardcodedStringsOption, ErrorSeverity> _f$severity =
       Field('severity', _$severity, opt: true, hook: ErrorSeverityHook());
@@ -39,8 +40,8 @@ class AvoidHardcodedStringsOptionMapper
   final Map<Symbol, Field<AvoidHardcodedStringsOption, dynamic>> fields =
       const {
     #minimumLength: _f$minimumLength,
-    #exclude: _f$exclude,
-    #include: _f$include,
+    #excludes: _f$excludes,
+    #includes: _f$includes,
     #severity: _f$severity,
   };
 
@@ -49,8 +50,8 @@ class AvoidHardcodedStringsOptionMapper
   static AvoidHardcodedStringsOption _instantiate(DecodingData data) {
     return AvoidHardcodedStringsOption(
         minimumLength: data.dec(_f$minimumLength),
-        exclude: data.dec(_f$exclude),
-        include: data.dec(_f$include),
+        excludes: data.dec(_f$excludes),
+        includes: data.dec(_f$includes),
         severity: data.dec(_f$severity));
   }
 
@@ -115,12 +116,12 @@ abstract class AvoidHardcodedStringsOptionCopyWith<
     $R,
     $In extends AvoidHardcodedStringsOption,
     $Out> implements ClassCopyWith<$R, $In, $Out> {
-  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get exclude;
-  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get include;
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get excludes;
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get includes;
   $R call(
       {int? minimumLength,
-      List<String>? exclude,
-      List<String>? include,
+      List<String>? excludes,
+      List<String>? includes,
       ErrorSeverity? severity});
   AvoidHardcodedStringsOptionCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
@@ -138,31 +139,31 @@ class _AvoidHardcodedStringsOptionCopyWithImpl<$R, $Out>
   late final ClassMapperBase<AvoidHardcodedStringsOption> $mapper =
       AvoidHardcodedStringsOptionMapper.ensureInitialized();
   @override
-  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get exclude =>
-      ListCopyWith($value.exclude, (v, t) => ObjectCopyWith(v, $identity, t),
-          (v) => call(exclude: v));
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get excludes =>
+      ListCopyWith($value.excludes, (v, t) => ObjectCopyWith(v, $identity, t),
+          (v) => call(excludes: v));
   @override
-  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get include =>
-      ListCopyWith($value.include, (v, t) => ObjectCopyWith(v, $identity, t),
-          (v) => call(include: v));
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get includes =>
+      ListCopyWith($value.includes, (v, t) => ObjectCopyWith(v, $identity, t),
+          (v) => call(includes: v));
   @override
   $R call(
           {int? minimumLength,
-          List<String>? exclude,
-          List<String>? include,
+          List<String>? excludes,
+          List<String>? includes,
           Object? severity = $none}) =>
       $apply(FieldCopyWithData({
         if (minimumLength != null) #minimumLength: minimumLength,
-        if (exclude != null) #exclude: exclude,
-        if (include != null) #include: include,
+        if (excludes != null) #excludes: excludes,
+        if (includes != null) #includes: includes,
         if (severity != $none) #severity: severity
       }));
   @override
   AvoidHardcodedStringsOption $make(CopyWithData data) =>
       AvoidHardcodedStringsOption(
           minimumLength: data.get(#minimumLength, or: $value.minimumLength),
-          exclude: data.get(#exclude, or: $value.exclude),
-          include: data.get(#include, or: $value.include),
+          excludes: data.get(#excludes, or: $value.excludes),
+          includes: data.get(#includes, or: $value.includes),
           severity: data.get(#severity, or: $value.severity));
 
   @override
