@@ -131,10 +131,10 @@
 			"}",
 		],
 	},
-	"option": {
+	"options": {
 		"scope": "dart",
-		"prefix": "option",
-		"description": "Dart Custom Lint Option",
+		"prefix": "options",
+		"description": "Dart Custom Lint Options",
 		"body": [
 			"import 'package:analyzer/error/error.dart';",
 			"import 'package:custom_lints_template/src/models/hooks/error_severity_hook.dart';",
