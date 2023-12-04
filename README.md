@@ -3,6 +3,9 @@
 
 `custom_lints_template` is a developer tool, designed to help stop common issue and simplify repetetive tasks. It adds various warnings with quick fixes and refactoring options.
 
+*Warning:* This template is currently outdated, as `custom_lint` has been updated to include the lint parameters.
+See [solid_lints](https://github.com/solid-software/solid_lints) for an up to date reference.
+
 ## Template Usage Checklist
 
 1. [ ] Replace all usages of `custom_lints_template` with your package name.
