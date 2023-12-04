@@ -1,6 +1,6 @@
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
-import 'package:custom_lints_template/src/lints/custom_lint_example/fixes/fix_example_fix.dart';
+import 'package:custom_lints_template/src/lints/custom_lint_example/fixes/custom_lint_example_fix.dart';
 import 'package:custom_lints_template/src/lints/custom_lint_example/models/custom_lint_example_options.dart';
 import 'package:custom_lints_template/src/models/options_lint_rule.dart';
 import 'package:custom_lints_template/src/models/rule_config.dart';
@@ -46,5 +46,5 @@ class CustomLintExampleRule extends OptionsLintRule<CustomLintExampleOptions> {
   }
 
   @override
-  List<Fix> getFixes() => [FixExampleFix(config)];
+  List<Fix> getFixes() => [CustomLintExampleFix(config)];
 }
