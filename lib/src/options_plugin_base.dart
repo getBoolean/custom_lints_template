@@ -7,6 +7,7 @@ import 'package:analyzer/source/source_range.dart';
 import 'package:collection/collection.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:custom_lints_template/src/options.dart';
+import 'package:custom_lints_template/src/utils/object_utils.dart';
 import 'package:custom_lints_template/src/utils/utils.dart';
 import 'package:path/path.dart';
 import 'package:yaml/yaml.dart';
@@ -99,10 +100,6 @@ abstract class OptionsLintRule extends DartLintRule with _OptionsMixin {
     CustomLintContext context,
   ) async {
     final options = _getOptions(resolver.path);
-    if (options.isFileRuleExcluded(resolver.path)) {
-      return;
-    }
-
     runWithOptions(resolver, reporter, context, options);
   }
 

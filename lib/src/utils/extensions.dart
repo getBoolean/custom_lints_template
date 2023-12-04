@@ -5,7 +5,6 @@ import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:custom_lints_template/src/utils/utils.dart';
 import 'package:path/path.dart' as p;
 import 'package:pub_semver/pub_semver.dart';
-import 'package:yaml/yaml.dart';
 
 /// Source: https://github.com/rrousselGit/riverpod/blob/master/packages/riverpod_lint/lib/src/object_utils.dart
 extension ObjectUtils<T> on T? {
@@ -20,14 +19,6 @@ extension ObjectUtils<T> on T? {
     if (that == null) return null;
     return cb?.call(that);
   }
-}
-
-extension StringExtension on List<String> {
-  List<RegExp> toRegExpList() => map(RegExp.new).toList();
-}
-
-extension RegexExtension on List<RegExp> {
-  bool has(String filepath) => any((path) => filepath.contains(path));
 }
 
 /// Source: https://github.com/epam-cross-platform-lab/swagger-dart-code-generator/blob/master/lib/src/extensions/yaml_extensions.dart

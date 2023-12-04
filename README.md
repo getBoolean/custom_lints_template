@@ -147,8 +147,6 @@ All lints have the following options:
 
 ```yaml
 custom_lints_template:
-  rules_exclude:
-    - "test/.*\\.dart"
   rules:
     example_lint_code:
       severity: info
