@@ -27,8 +27,7 @@ class CustomLintExampleRule extends OptionsLintRule<CustomLintExampleOptions> {
     ErrorReporter reporter,
     CustomLintContext context,
   ) async {
-    final parameters = config.parameters;
-    final severity = parameters.severity;
+    final severity = config.parameters.severity;
     final code = this.code.copyWith(errorSeverity: severity);
     context.registry.addVariableDeclaration((node) {
       // TODO: Check if the error should be reported
