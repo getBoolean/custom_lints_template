@@ -1,14 +1,14 @@
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:custom_lints_template/src/lints/avoid_hardcoded_strings/fixes/avoid_hardcoded_strings_fix.dart';
-import 'package:custom_lints_template/src/lints/avoid_hardcoded_strings/models/avoid_hardcoded_strings.dart';
+import 'package:custom_lints_template/src/lints/avoid_hardcoded_strings/models/avoid_hardcoded_strings_options.dart';
 import 'package:custom_lints_template/src/models/options_lint_rule.dart';
 import 'package:custom_lints_template/src/models/rule_config.dart';
 import 'package:custom_lints_template/src/utils/extensions.dart';
 import 'package:custom_lints_template/src/utils/path_utils.dart';
 
 class AvoidHardcodedStringsRule
-    extends OptionsLintRule<AvoidHardcodedStringsOption> {
+    extends OptionsLintRule<AvoidHardcodedStringsOptions> {
   /// Creates a new instance of [AvoidHardcodedStringsRule]
   /// based on the lint configuration.
   AvoidHardcodedStringsRule(
@@ -16,7 +16,7 @@ class AvoidHardcodedStringsRule
   ) : super(RuleConfig(
           configs: configs,
           name: lintName,
-          paramsParser: AvoidHardcodedStringsOption.fromMap,
+          paramsParser: AvoidHardcodedStringsOptions.fromMap,
           problemMessage: (_) =>
               'Avoid hardcoding strings. Use a localization package or append ".hardcoded" to the string to suppress this message.',
         ));

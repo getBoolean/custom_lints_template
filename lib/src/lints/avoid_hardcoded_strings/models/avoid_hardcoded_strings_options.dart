@@ -3,11 +3,11 @@ import 'package:custom_lints_template/src/models/hooks/error_severity_hook.dart'
 import 'package:custom_lints_template/src/models/hooks/map_or_list_hook.dart';
 import 'package:dart_mappable/dart_mappable.dart';
 
-part 'avoid_hardcoded_strings.mapper.dart';
+part 'avoid_hardcoded_strings_options.mapper.dart';
 
 @MappableClass(caseStyle: CaseStyle.snakeCase, hook: MapOrListHook())
-class AvoidHardcodedStringsOption with AvoidHardcodedStringsOptionMappable {
-  const AvoidHardcodedStringsOption({
+class AvoidHardcodedStringsOptions with AvoidHardcodedStringsOptionsMappable {
+  const AvoidHardcodedStringsOptions({
     this.minimumLength = 0,
     this.excludes = const [],
     this.includes = const [],
@@ -21,6 +21,6 @@ class AvoidHardcodedStringsOption with AvoidHardcodedStringsOptionMappable {
   final List<String> excludes;
   final List<String> includes;
 
-  static const fromJson = AvoidHardcodedStringsOptionMapper.fromJson;
-  static const fromMap = AvoidHardcodedStringsOptionMapper.fromMap;
+  static const fromJson = AvoidHardcodedStringsOptionsMapper.fromJson;
+  static const fromMap = AvoidHardcodedStringsOptionsMapper.fromMap;
 }

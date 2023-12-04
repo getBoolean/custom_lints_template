@@ -1,13 +1,13 @@
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
-import 'package:custom_lints_template/src/lints/custom_lint_example/fixes/fix_example.dart';
-import 'package:custom_lints_template/src/lints/custom_lint_example/models/custom_lint_example.dart';
+import 'package:custom_lints_template/src/lints/custom_lint_example/fixes/fix_example_fix.dart';
+import 'package:custom_lints_template/src/lints/custom_lint_example/models/custom_lint_example_options.dart';
 import 'package:custom_lints_template/src/models/options_lint_rule.dart';
 import 'package:custom_lints_template/src/models/rule_config.dart';
 import 'package:custom_lints_template/src/utils/extensions.dart';
 import 'package:custom_lints_template/src/utils/path_utils.dart';
 
-class CustomLintExampleRule extends OptionsLintRule<CustomLintExampleOption> {
+class CustomLintExampleRule extends OptionsLintRule<CustomLintExampleOptions> {
   /// Creates a new instance of [OptionsLintRule]
   /// based on the lint configuration.
   CustomLintExampleRule(
@@ -15,7 +15,7 @@ class CustomLintExampleRule extends OptionsLintRule<CustomLintExampleOption> {
   ) : super(RuleConfig(
           configs: configs,
           name: lintName,
-          paramsParser: CustomLintExampleOption.fromMap,
+          paramsParser: CustomLintExampleOptions.fromMap,
           problemMessage: (_) => 'This is the description of our custom lint',
         ));
 
