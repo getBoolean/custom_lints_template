@@ -1,6 +1,6 @@
 import 'package:analyzer/error/error.dart';
-import 'package:custom_lints_template/src/options/hooks/error_severity_hook.dart';
-import 'package:custom_lints_template/src/options/hooks/map_or_list_hook.dart';
+import 'package:custom_lints_template/src/models/hooks/error_severity_hook.dart';
+import 'package:custom_lints_template/src/models/hooks/map_or_list_hook.dart';
 import 'package:dart_mappable/dart_mappable.dart';
 
 part 'custom_lint_example.mapper.dart';

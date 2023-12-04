@@ -1,9 +1,9 @@
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
-import 'package:custom_lints_template/src/lints/fixes/avoid_hardcoded_strings.dart';
+import 'package:custom_lints_template/src/lints/avoid_hardcoded_strings/fixes/avoid_hardcoded_strings_fix.dart';
+import 'package:custom_lints_template/src/lints/avoid_hardcoded_strings/models/avoid_hardcoded_strings.dart';
 import 'package:custom_lints_template/src/models/options_lint_rule.dart';
 import 'package:custom_lints_template/src/models/rule_config.dart';
-import 'package:custom_lints_template/src/options/avoid_hardcoded_strings.dart';
 import 'package:custom_lints_template/src/utils/extensions.dart';
 import 'package:custom_lints_template/src/utils/path_utils.dart';
 
@@ -21,8 +21,7 @@ class AvoidHardcodedStringsRule
               'Avoid hardcoding strings. Use a localization package or append ".hardcoded" to the string to suppress this message.',
         ));
 
-  /// The [LintCode] of this lint rule that represents
-  /// the error whether we use bad formatted double literals.
+  /// The [LintCode] of this lint rule
   static const String lintName = 'avoid_hardcoded_strings';
 
   @override
