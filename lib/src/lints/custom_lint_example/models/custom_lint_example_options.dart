@@ -8,13 +8,8 @@ part 'custom_lint_example_options.mapper.dart';
 @MappableClass(caseStyle: CaseStyle.snakeCase, hook: MapOrListHook())
 class CustomLintExampleOptions with CustomLintExampleOptionsMappable {
   const CustomLintExampleOptions({
-    this.exclude = const [],
-    this.include = const [],
     this.severity,
   });
-
-  final List<String> exclude;
-  final List<String> include;
 
   @MappableField(hook: ErrorSeverityHook())
   final ErrorSeverity? severity;

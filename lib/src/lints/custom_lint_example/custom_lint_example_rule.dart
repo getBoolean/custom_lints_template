@@ -5,7 +5,6 @@ import 'package:custom_lints_template/src/lints/custom_lint_example/models/custo
 import 'package:custom_lints_template/src/models/options_lint_rule.dart';
 import 'package:custom_lints_template/src/models/rule_config.dart';
 import 'package:custom_lints_template/src/utils/extensions.dart';
-import 'package:custom_lints_template/src/utils/path_utils.dart';
 
 class CustomLintExampleRule extends OptionsLintRule<CustomLintExampleOptions> {
   /// Creates a new instance of [OptionsLintRule]
@@ -29,14 +28,6 @@ class CustomLintExampleRule extends OptionsLintRule<CustomLintExampleOptions> {
     CustomLintContext context,
   ) async {
     final parameters = config.parameters;
-    if (shouldSkipFile(
-      includeGlobs: parameters.include,
-      excludeGlobs: parameters.exclude,
-      path: resolver.path,
-    )) {
-      return;
-    }
-
     final severity = parameters.severity;
     final code = this.code.copyWith(errorSeverity: severity);
     context.registry.addVariableDeclaration((node) {
