@@ -1,7 +1,7 @@
 import 'package:analyzer/source/source_range.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 
-class CustomAssistExampleAssist extends DartAssist {
+class CustomAssistExample extends DartAssist {
   @override
   Future<void> run(
     CustomLintResolver resolver,
@@ -15,7 +15,7 @@ class CustomAssistExampleAssist extends DartAssist {
 
       final changeBuilder = reporter.createChangeBuilder(
         priority: 1,
-        message: 'Custom fix for code',
+        message: 'Custom assist for code',
       );
       changeBuilder.addDartFileEdit((builder) {
         // TODO: <implement change to refactor the code>

@@ -83,7 +83,7 @@
 			"",
 			"      final changeBuilder = reporter.createChangeBuilder(",
 			"        priority: 1,",
-			"        message: '${2:Custom fix for code}',",
+			"        message: '${2:Custom assist for code}',",
 			"      );",
 			"      changeBuilder.addDartFileEdit((builder) {",
 			"        ${3:// TODO: <implement change to refactor the code>}",
