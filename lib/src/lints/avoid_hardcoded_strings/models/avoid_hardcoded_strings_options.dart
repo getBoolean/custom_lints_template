@@ -8,7 +8,7 @@ part 'avoid_hardcoded_strings_options.mapper.dart';
 
 @MappableClass(caseStyle: CaseStyle.snakeCase, hook: MapOrListHook())
 class AvoidHardcodedStringsOptions extends Excludable
-    with AvoidHardcodedStringsOptionsMappable, ExcludableMixin {
+    with AvoidHardcodedStringsOptionsMappable {
   const AvoidHardcodedStringsOptions({
     this.minimumLength = 0,
     this.excludes = const [],
