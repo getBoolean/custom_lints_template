@@ -96,3 +96,12 @@ extension CustomLintContextExtension on CustomLintContext {
 extension UriToFileExtension on Uri {
   File toFile() => File(p.fromUri('file:///$this'));
 }
+
+extension CustomLintResolverRootPath on CustomLintResolver {
+  Future<String> get rootPath async => (await getResolvedUnitResult())
+      .session
+      .analysisContext
+      .contextRoot
+      .root
+      .path;
+}

@@ -5,7 +5,6 @@ import 'package:custom_lints_template/src/lints/avoid_hardcoded_strings/models/a
 import 'package:custom_lints_template/src/models/options_lint_rule.dart';
 import 'package:custom_lints_template/src/models/rule_config.dart';
 import 'package:custom_lints_template/src/utils/extensions.dart';
-import 'package:custom_lints_template/src/utils/path_utils.dart';
 
 class AvoidHardcodedStringsRule
     extends OptionsLintRule<AvoidHardcodedStringsOptions> {
@@ -30,17 +29,9 @@ class AvoidHardcodedStringsRule
     ErrorReporter reporter,
     CustomLintContext context,
   ) async {
-    final rootPath = (await resolver.getResolvedUnitResult())
-        .session
-        .analysisContext
-        .contextRoot
-        .root
-        .path;
-
+    final rootPath = await resolver.rootPath;
     final parameters = config.parameters;
-    if (shouldSkipFile(
-      includeGlobs: parameters.includes,
-      excludeGlobs: parameters.excludes,
+    if (parameters.shouldSkipAnalysis(
       path: resolver.path,
       rootPath: rootPath,
     )) {
@@ -48,9 +39,8 @@ class AvoidHardcodedStringsRule
     }
 
     final minimumLength = parameters.minimumLength;
-    final severity = parameters.severity;
     final code = this.code.copyWith(
-          errorSeverity: severity ?? this.code.errorSeverity,
+          errorSeverity: parameters.severity ?? this.code.errorSeverity,
         );
 
     context.registry.addSimpleStringLiteral((node) {
