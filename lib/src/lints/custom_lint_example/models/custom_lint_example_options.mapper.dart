@@ -25,16 +25,27 @@ class CustomLintExampleOptionsMapper
   static ErrorSeverity? _$severity(CustomLintExampleOptions v) => v.severity;
   static const Field<CustomLintExampleOptions, ErrorSeverity> _f$severity =
       Field('severity', _$severity, opt: true, hook: ErrorSeverityHook());
+  static List<String> _$includes(CustomLintExampleOptions v) => v.includes;
+  static const Field<CustomLintExampleOptions, List<String>> _f$includes =
+      Field('includes', _$includes, opt: true, def: const []);
+  static List<String> _$excludes(CustomLintExampleOptions v) => v.excludes;
+  static const Field<CustomLintExampleOptions, List<String>> _f$excludes =
+      Field('excludes', _$excludes, opt: true, def: const []);
 
   @override
   final Map<Symbol, Field<CustomLintExampleOptions, dynamic>> fields = const {
     #severity: _f$severity,
+    #includes: _f$includes,
+    #excludes: _f$excludes,
   };
 
   @override
   final MappingHook hook = const MapOrListHook();
   static CustomLintExampleOptions _instantiate(DecodingData data) {
-    return CustomLintExampleOptions(severity: data.dec(_f$severity));
+    return CustomLintExampleOptions(
+        severity: data.dec(_f$severity),
+        includes: data.dec(_f$includes),
+        excludes: data.dec(_f$excludes));
   }
 
   @override
@@ -96,7 +107,12 @@ abstract class CustomLintExampleOptionsCopyWith<
     $R,
     $In extends CustomLintExampleOptions,
     $Out> implements ClassCopyWith<$R, $In, $Out> {
-  $R call({ErrorSeverity? severity});
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get includes;
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get excludes;
+  $R call(
+      {ErrorSeverity? severity,
+      List<String>? includes,
+      List<String>? excludes});
   CustomLintExampleOptionsCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -111,11 +127,28 @@ class _CustomLintExampleOptionsCopyWithImpl<$R, $Out>
   late final ClassMapperBase<CustomLintExampleOptions> $mapper =
       CustomLintExampleOptionsMapper.ensureInitialized();
   @override
-  $R call({Object? severity = $none}) =>
-      $apply(FieldCopyWithData({if (severity != $none) #severity: severity}));
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get includes =>
+      ListCopyWith($value.includes, (v, t) => ObjectCopyWith(v, $identity, t),
+          (v) => call(includes: v));
+  @override
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get excludes =>
+      ListCopyWith($value.excludes, (v, t) => ObjectCopyWith(v, $identity, t),
+          (v) => call(excludes: v));
+  @override
+  $R call(
+          {Object? severity = $none,
+          List<String>? includes,
+          List<String>? excludes}) =>
+      $apply(FieldCopyWithData({
+        if (severity != $none) #severity: severity,
+        if (includes != null) #includes: includes,
+        if (excludes != null) #excludes: excludes
+      }));
   @override
   CustomLintExampleOptions $make(CopyWithData data) => CustomLintExampleOptions(
-      severity: data.get(#severity, or: $value.severity));
+      severity: data.get(#severity, or: $value.severity),
+      includes: data.get(#includes, or: $value.includes),
+      excludes: data.get(#excludes, or: $value.excludes));
 
   @override
   CustomLintExampleOptionsCopyWith<$R2, CustomLintExampleOptions, $Out2>
